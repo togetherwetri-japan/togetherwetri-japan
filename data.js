@@ -23,7 +23,7 @@
 
 const SITE = {
   // 問い合わせ先メールアドレス（サイトに表示されます）
-  email: "japan@example.org",
+  email: "togetherwetri.japan@gmail.com",
 
   // Formspree のフォームURL（例: "https://formspree.io/f/abcdwxyz"）
   // 入れると、問い合わせフォームから直接メールが届くようになります。
@@ -35,37 +35,29 @@ const SITE = {
 };
 
 const MEMBERS = [
-  { name: { en: "Member Name", ja: "氏名" }, role: { en: "Branch Lead", ja: "支部代表" }, aff: { en: "University / Organization · YTL 20XX", ja: "所属 · YTL 20XX年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "" },
-  { name: { en: "Member Name", ja: "氏名" }, role: { en: "Deputy Lead", ja: "副代表" }, aff: { en: "University / Organization · YTL 20XX", ja: "所属 · YTL 20XX年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "" },
-  { name: { en: "Member Name", ja: "氏名" }, role: { en: "Programs", ja: "企画担当" }, aff: { en: "University / Organization · YTL 20XX", ja: "所属 · YTL 20XX年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "" },
-  { name: { en: "Member Name", ja: "氏名" }, role: { en: "Communications", ja: "広報担当" }, aff: { en: "University / Organization · YTL 20XX", ja: "所属 · YTL 20XX年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "" },
+  { name: { en: "Sora Yamasaki", ja: "山﨑蒼空" }, role: { en: "ROLE", ja: "役職" }, aff: { en: "Japan Institue for Health Security · YTL 2025 Osaka", ja: "国立健康危機管理研究機構 · YTL 2025年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "member-sora.jpg" },
+  { name: { en: "Mayu Kitahara", ja: "北原真悠" }, role: { en: "ROLE", ja: "役職" }, aff: { en: "Sophia University · YTL 2025 Osaka", ja: "所属 · YTL 2025年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "" },
+  { name: { en: "Tamaki Hoshi", ja: "星たまき" }, role: { en: "ROLE", ja: "役職" }, aff: { en: "University / Organization · YTL 2024 Busan", ja: "所属 · YTL 2024年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "" },
+  { name: { en: "Aruto Masuda", ja: "氏名" }, role: { en: "ROLE", ja: "役職" }, aff: { en: "University / Organization · YTL 20XX", ja: "所属 · YTL 20XX年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "" },
   { name: { en: "Member Name", ja: "氏名" }, role: { en: "Partnerships", ja: "渉外担当" }, aff: { en: "University / Organization · YTL 20XX", ja: "所属 · YTL 20XX年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "" },
   { name: { en: "Member Name", ja: "氏名" }, role: { en: "Community", ja: "コミュニティ担当" }, aff: { en: "University / Organization · YTL 20XX", ja: "所属 · YTL 20XX年" }, bio: { en: "One or two sentences about this person's focus and why they joined.", ja: "専門分野や参加のきっかけを1〜2文で紹介します。" }, photo: "" }
 ];
-const MEMBERS_ARE_PLACEHOLDERS = true;  // 実際のメンバー情報に差し替えたら false にすると「テンプレート」表示が消えます
+const MEMBERS_ARE_PLACEHOLDERS = false;  // 実際のメンバー情報に差し替えたら false にすると「テンプレート」表示が消えます
 
 // sample: true の項目には「サンプル」表示が付きます。実際のイベントでは sample: false にするか、その行を消してください。
 const EVENTS = [
-  { date: "2026-11-14", time: "14:00–17:00 JST", sample: true,
-    title: { en: "Trilateral Youth Dialogue: Economic Security in Practice", ja: "日米韓ユースダイアローグ：実践としての経済安全保障" },
-    place: { en: "Tokyo (venue to be announced)", ja: "東京（会場は後日発表）" }, format: "inperson", langs: "EN / JA",
-    desc: { en: "Small-group discussions on supply chains, export controls and what economic security means for students entering the workforce.", ja: "サプライチェーンや輸出管理、そしてこれから社会に出る学生にとって経済安全保障が何を意味するのかを、少人数で議論します。" } },
-  { date: "2026-12-05", time: "10:00–11:30 JST", sample: true,
-    title: { en: "Advanced Tech Cooperation Workshop: Semiconductors and AI", ja: "先端技術協力ワークショップ：半導体とAI" },
-    place: { en: "Online", ja: "オンライン" }, format: "online", langs: "EN",
-    desc: { en: "A joint session with peers in Seoul and Washington on how Japan, the U.S. and Korea divide and share work in critical technologies.", ja: "ソウル・ワシントンの仲間と合同で、重要技術分野における日米韓の役割分担と協力のあり方を考えます。" } },
-  { date: "2027-01-23", time: "13:00–16:00 JST", sample: true,
-    title: { en: "Local Communities × Trilateral Ties: Roundtable in Fukuoka", ja: "地域 × 日米韓：福岡ラウンドテーブル" },
-    place: { en: "Fukuoka", ja: "福岡" }, format: "inperson", langs: "JA / EN",
-    desc: { en: "Students, local businesses and city officials talk about cross-border links between Kyushu, Korea and the U.S.", ja: "学生、地元企業、自治体関係者が、九州と韓国・米国をつなぐ交流について語り合います。" } },
-  { date: "2026-09-27", time: "", sample: true,
-    title: { en: "Japan Branch Kickoff Meetup", ja: "日本支部キックオフ交流会" },
-    place: { en: "Tokyo", ja: "東京" }, format: "inperson", langs: "EN / JA",
-    desc: { en: "Our first gathering: introductions, plans for the year and a call for new team members.", ja: "最初の交流会。自己紹介、年間計画の共有、運営メンバーの募集を行いました。" } },
-  { date: "2026-07-18", time: "", sample: true,
-    title: { en: "Reading Group: The Camp David Documents", ja: "読書会：キャンプ・デービッド関連文書を読む" },
-    place: { en: "Online", ja: "オンライン" }, format: "online", langs: "EN",
-    desc: { en: "A close reading of the 2023 Camp David joint statement and principles, with discussion on what has happened since.", ja: "2023年のキャンプ・デービッド共同声明と原則を読み込み、その後の動きについて議論しました。" } }
+  { date: "2026-10-10", time: "14:00–17:00 JST", sample: false,
+    title: { en: "Japan-U.S.-ROK Youth Dialogue: Innovation & Resilience", ja: "日米韓の次世代がつくるイノベーションとレジリエンス" },
+    place: { en: "Sendai (INTILAQ Tohoku Innovation Center)", ja: "仙台（INTILAQ 東北イノベーションセンター）" }, format: "inperson / online", langs: "EN / JA",
+    desc: { en: "This event brings together young people from Japan, the United States, and the Republic of Korea in Sendai to explore new forms of cooperation across national and cultural boundaries. Featuring experts and emerging leaders from the three countries, the event focuses on innovation, resilience, and regional revitalization across various fields. It provides an opportunity for participants to engage in dialogue and collectively envision new ways for the next generation to advance trilateral cooperation.", ja: "本イベントは、日本・米国・韓国の若者が仙台に集結し、国や立場の違いを越えて「協力」の新しいかたちを語り合う対話イベントです。様々な分野におけるイノベーション（革新）やレジリエンス（回復力）、地方創生をテーマに、日米韓の有識者や若手リーダーをお招きし、次世代の「協力」のあり方を参加者の皆さまと共に考える機会となっております。" }, photo: "poster-sendai1010"},
+  { date: "2026-03-08", time: "11:00 – 13:00 JST", sample: false,
+    title: { en: "Trilateral Sports Diplomacy Dialogue in Tokyo – From Olympic Legacy to Sports Diplomacy"},
+    place: { en: "Lakeland University Japan Conference Room (Muskie Hall)"}, format: "inperson", langs: "EN",
+    desc: { en: "This session will explore how sports, Olympic legacy, and urban engagement can contribute to public diplomacy and future trilateral collaboration", ja: "本セッションでは、スポーツを通じた人と人とのつながりが、次世代の国際協力や公共外交にどのような可能性をもたらすのかをテーマに、専門家やリーダーとともに議論を行います。" }, photo: "poster-tokyo0308"},
+  { date: "2026-03-06", time: "14:00–17:00 JST", sample: false,
+    title: { en: "YTL U.S.-ROK-Japan Cooperation Dialogue in Tokyo"},
+    place: { en: "Lakeland University Japan Conference Room (Muskie Hall) "}, format: "inperson", langs: "EN",
+    desc: { en: "This session will explore how strengthening Japan–ROK partnership can further advance U.S.–ROK–Japan collaboration in support of Indo-Pacific stability. Featuring speakers and panelists from diverse academic and professional backgrounds, the dialogue aims to foster thoughtful discussion, cross-border connections, and practical perspectives on youth-driven cooperation.", ja: "本セッションでは、日韓パートナーシップの強化を通じて、インド太平洋地域の安定に向けた日米韓協力をどのように発展させていけるかをテーマに、多様な分野で活躍するスピーカーやパネリストとともに議論を行います。" }, photo: "poster-tokyo0306"}
 ];
 
 const POST_CATS = {
