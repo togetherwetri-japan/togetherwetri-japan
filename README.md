@@ -12,8 +12,7 @@ GitHub Pages を使って **無料で** 公開・更新できます。
 | `data.js` | メールアドレス、メンバー、イベント、記事、フォーム設定 | **よく編集する**（日々の更新はほぼここだけ） |
 | `index.html` | ページの文章（設立の背景、年表、FAQ など）とデザイン | ときどき |
 | `app.js` | サイトの動きのプログラム | 基本的に触らない |
-| `img/` | ロゴ、マスコット、バナーなどの画像 | 画像を差し替えるとき |
-| `img/members/` | メンバー写真を入れるフォルダ | メンバー更新時 |
+| `banner.webp` などの画像 | ロゴ、マスコット、バナーなどの画像（`index.html` と同じ場所に置きます） | 画像を差し替えるとき |
 
 > パソコンで `index.html` をダブルクリックすると、公開前でもブラウザで見た目を確認できます。
 
@@ -35,9 +34,8 @@ GitHub Pages を使って **無料で** 公開・更新できます。
 
 ### ③ ファイルをアップロードする
 1. 作成直後の画面にある「**uploading an existing file**」をクリックします。
-2. zip を展開したフォルダの **中身**（`index.html`、`data.js`、`app.js`、`README.md`、`img` フォルダ）をまとめてドラッグ＆ドロップします。
-   - zip ファイルのままではなく、必ず展開した中身を入れてください。
-   - Chrome か Edge を使うと、`img` フォルダごとドラッグできます。
+2. `index.html`、`data.js`、`app.js`、`README.md` と、すべての画像ファイルをまとめてドラッグ＆ドロップします。
+   - 画像はフォルダに入れず、`index.html` と同じ場所（一番上の階層）に置きます。
 3. 一番下の「**Commit changes**」を押します。
 
 ### ④ 公開をオンにする
@@ -98,8 +96,8 @@ GitHub Pages を使って **無料で** 公開・更新できます。
 
 ### メンバーを登録する
 1. 写真を用意します。正方形に近い jpg か png で、小さいファイル（500KB以下）が目安です。
-2. GitHub で `img/members` フォルダを開き、「Add file」→「Upload files」でアップロードします。
-3. `data.js` の `MEMBERS` を書き換え、`photo: "img/members/ファイル名.jpg"` を指定します。
+2. リポジトリのトップページで「Add file」→「Upload files」から写真をアップロードします。名前は `member-tanaka.jpg` のように半角英数字にしてください。
+3. `data.js` の `MEMBERS` を書き換え、`photo: "member-tanaka.jpg"` のように指定します。
 4. 全員の情報に差し替えたら、`MEMBERS_ARE_PLACEHOLDERS` を `false` にします。これで「テンプレート」の注意書きが消えます。
 
 ### サンプルを消す
@@ -163,7 +161,7 @@ GitHub で `data.js` を開き「**History**」を押すと、過去の版がす
 こうすると、X や Facebook、LINE でリンクを共有したときにロゴ画像が表示されます。
 
 ```html
-<meta property="og:image" content="https://あなたのURL/img/og.png">
+<meta property="og:image" content="https://あなたのURL/og.png">
 ```
 
 ---
@@ -177,7 +175,7 @@ GitHub で `data.js` を開き「**History**」を押すと、過去の版がす
 
 ## 9. 画像を差し替える
 
-`img` フォルダに **同じファイル名** でアップロードすると、上書きされます。
+リポジトリのトップページに **同じファイル名** でアップロードすると、上書きされます。
 
 | ファイル | 内容 |
 |---|---|

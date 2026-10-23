@@ -41,7 +41,7 @@ function eventHTML(e) {
     <div class="ev-act">${past ? "" : `<a class="btn" href="#contact" data-nav="contact" data-topic="event" data-event="${esc(t(e.title))}">${L("Register", "申し込む")}</a>`}</div>
   </article>`;
 }
-const emptyHTML = (msg) => `<div class="empty"><img src="img/haru.png" alt=""><span>${msg}</span></div>`;
+const emptyHTML = (msg) => `<div class="empty"><img src="haru.png" alt=""><span>${msg}</span></div>`;
 
 function renderEvents() {
   const up = EVENTS.filter((e) => parseDate(e.date) >= TODAY).sort((a, b) => a.date.localeCompare(b.date));
@@ -78,7 +78,7 @@ function renderPosts() {
 function renderMembers() {
   $("#members-note").hidden = !MEMBERS_ARE_PLACEHOLDERS;
   $("#members").innerHTML = MEMBERS.map((m) => `<article class="member">
-    <div class="avatar">${m.photo ? `<img src="${esc(m.photo)}" alt="">` : `<img class="ph" src="img/mark.png" alt="">`}</div>
+    <div class="avatar">${m.photo ? `<img src="${esc(m.photo)}" alt="">` : `<img class="ph" src="mark.png" alt="">`}</div>
     <div>
       <span class="role">${esc(t(m.role))}</span>
       <h3>${esc(t(m.name))}</h3>
