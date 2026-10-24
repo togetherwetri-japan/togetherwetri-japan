@@ -9,7 +9,36 @@ const TODAY = new Date(); TODAY.setHours(0, 0, 0, 0);
 
 const t = (o) => (o && typeof o === "object") ? (o[LANG] ?? o.en) : (o ?? "");
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const parseDate = (s) => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+const parseDate = (s) => { const [y, m, d] = String(s).trim().slice(0, 10).split("-").map(Number); return new Date(y, m - 1, d); };
+// Event dates: date: "2026-06-12", or a range date: "2026-06-12 ~ 2026-06-14" (or endDate: "2026-06-14")
+const evStart = (e) => parseDate(e.date);
+const evEnd = (e) => { const parts = String(e.date).split(/[~〜]/); const end = e.endDate || (parts[1] && parts[1].trim()); return end ? parseDate(end) : evStart(e); };
+function fmtRange(e) {
+  const a = evStart(e), b = evEnd(e);
+  if (+a === +b) return fmtLong(e.date);
+  const sameY = a.getFullYear() === b.getFullYear(), sameM = sameY && a.getMonth() === b.getMonth();
+  if (LANG === "ja") return `${a.getFullYear()}年${a.getMonth() + 1}月${a.getDate()}日〜${sameY ? "" : b.getFullYear() + "年"}${sameM ? "" : (b.getMonth() + 1) + "月"}${b.getDate()}日`;
+  const md = (d) => d.toLocaleDateString("en-US", { month: "long", day: "numeric" });
+  return sameM ? `${md(a)}–${b.getDate()}, ${b.getFullYear()}` : sameY ? `${md(a)} – ${md(b)}, ${b.getFullYear()}` : `${fmtLong(e.date)} – ${b.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`;
+}
+// Organizers, supporters and partners shown under each event
+const CREDIT_KEYS = [
+  ["organizer", "Organized by", "主催"],
+  ["cohost", "Co-hosted by", "共催"],
+  ["support", "Supported by", "後援"],
+  ["sponsor", "Sponsored by", "協賛"],
+  ["partners", "In collaboration with", "協力"]
+];
+function creditText(v) {
+  if (!v) return "";
+  if (Array.isArray(v)) return v.map(creditText).filter(Boolean).join(LANG === "ja" ? "、" : ", ");
+  if (typeof v === "object") return t(v);
+  return String(v);
+}
+function creditsHTML(e) {
+  const rows = CREDIT_KEYS.map(([k, en, ja]) => { const v = creditText(e[k]); return v ? `<dt>${L(en, ja)}</dt><dd>${esc(v)}</dd>` : ""; }).join("");
+  return rows ? `<dl class="ev-credits">${rows}</dl>` : "";
+}
 const MONTHS_EN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const fmtLong = (s) => {
   const d = parseDate(s);
@@ -28,8 +57,8 @@ const DOC_ICON = '<svg class="ico-doc" viewBox="0 0 24 24" fill="none" stroke="c
 
 function eventHTML(e) {
   const i = EVENTS.indexOf(e);
-  const d = parseDate(e.date);
-  const past = d < TODAY;
+  const d = evStart(e);
+  const past = evEnd(e) < TODAY;
   const poster = e.poster || e.photo || "";
   const report = e.report || "";
   const isPdf = /\.pdf($|[?#])/i.test(report);
@@ -49,8 +78,9 @@ function eventHTML(e) {
         ${e.sample ? `<span class="chip sample">${L("Sample", "サンプル")}</span>` : ""}
       </div>
       <h3>${esc(t(e.title))}</h3>
-      <div class="ev-meta"><span>${fmtLong(e.date)}${e.time ? " · " + esc(e.time) : ""}</span><span>${esc(t(e.place))}</span></div>
+      <div class="ev-meta"><span>${fmtRange(e)}${e.time ? " · " + esc(e.time) : ""}</span><span>${esc(t(e.place))}</span></div>
       <p>${esc(t(e.desc))}</p>
+      ${creditsHTML(e)}
       ${actions.length ? `<div class="btns">${actions.join("")}</div>` : ""}
     </div>
     ${poster ? `<button type="button" class="ev-poster" data-poster="${i}"><img src="${esc(poster)}" alt="${esc(L("Poster: ", "ポスター：") + t(e.title))}" loading="lazy"><span>${L("View poster", "ポスターを拡大")}</span></button>` : ""}
@@ -59,8 +89,8 @@ function eventHTML(e) {
 const emptyHTML = (msg) => `<div class="empty"><img src="haru.png" alt=""><span>${msg}</span></div>`;
 
 function renderEvents() {
-  const up = EVENTS.filter((e) => parseDate(e.date) >= TODAY).sort((a, b) => a.date.localeCompare(b.date));
-  const past = EVENTS.filter((e) => parseDate(e.date) < TODAY).sort((a, b) => b.date.localeCompare(a.date));
+  const up = EVENTS.filter((e) => evEnd(e) >= TODAY).sort((a, b) => a.date.localeCompare(b.date));
+  const past = EVENTS.filter((e) => evEnd(e) < TODAY).sort((a, b) => b.date.localeCompare(a.date));
   const list = evFilter === "upcoming" ? up : past;
   $("#events-list").innerHTML = list.length ? list.map(eventHTML).join("")
     : emptyHTML(evFilter === "upcoming" ? L("No upcoming events yet. Check back soon or subscribe to the newsletter.", "現在予定されているイベントはありません。ニュースレターで最新情報をお届けします。") : L("No past events yet.", "過去のイベントはまだありません。"));
