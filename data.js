@@ -53,7 +53,7 @@ const EVENTS = [
    , organizer:{en:"INTILAQ Tohoku Innovation Center, zero to one, Inc.", ja: "INTILAQ東北イノベーションセンター, 株式会社 zero to one" }, support: {en:"Sendai City, United States Embassy, Consulate General of the Republic of Korea in Sendai", ja: "仙台市、在日米国大使館、駐仙台大韓民国総領事館"},
   photo: "poster-sendai1010.jpg", report: "report-sendai1010.pdf"},
    { date: "2026-06-13", time: "10:00 – 14:00 JST", sample: false,
-    title: { en: "Trilateral Sports Diplomacy Dialogue in Tokyo – From Olympic Legacy to Sports Diplomacy"},
+    title: { en: "U.S.–ROK–Japan Professional x Youth Dialogue"},
     place: { en: "Hosei University Ichigaya Campus, Fujimi Gate G401"}, format: "inperson", langs: "EN",
     desc: { en: "Building on TogetherWeTri’s trilateral youth network and JASC’s student-led U.S.-Japan exchange legacy since 1934, this forum will expand people-to-people dialogue into a practical U.S.–ROK–Japan framework. The program will explore how next-generation leaders and experienced professionals can work together to strengthen public diplomacy, regional cooperation, and a secure and prosperous Indo-Pacific.", ja: "TogetherWeTriが築いてきた日米韓の若者ネットワークと、1934年以来、学生主体の日米交流を続けてきたJASCの伝統を基盤に、本フォーラムでは、人と人との対話を日米韓三か国の実践的な協力の枠組みへと発展させます。" }
    , photo: "poster-tokyo0613.jpg", report: "report-tokyo0613.pdf"},
