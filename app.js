@@ -18,11 +18,25 @@ const fmtLong = (s) => {
 };
 const L = (en, ja) => LANG === "ja" ? ja : en;
 
+function formatLabel(f) {
+  const s = String(f || "").toLowerCase();
+  const online = s.includes("online"), inPerson = s.includes("person");
+  if (s.includes("hybrid") || (online && inPerson)) return L("Hybrid (in person + online)", "ハイブリッド（対面・オンライン）");
+  return online ? L("Online", "オンライン") : L("In person", "対面");
+}
+const DOC_ICON = '<svg class="ico-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h8M9 17h6"/></svg>';
+
 function eventHTML(e) {
+  const i = EVENTS.indexOf(e);
   const d = parseDate(e.date);
   const past = d < TODAY;
-  const fmt = e.format === "online" ? L("Online", "オンライン") : L("In person", "対面");
-  return `<article class="event${past ? " is-past" : ""}">
+  const poster = e.poster || e.photo || "";
+  const report = e.report || "";
+  const isPdf = /\.pdf($|[?#])/i.test(report);
+  const actions = [];
+  if (!past) actions.push(`<a class="btn" href="#contact" data-nav="contact" data-topic="event" data-event="${esc(t(e.title))}">${L("Register", "申し込む")}</a>`);
+  if (report) actions.push(`<a class="btn ${past ? "" : "ghost"}" href="${esc(report)}" target="_blank" rel="noopener">${DOC_ICON}${L("Event report", "イベントレポート")}${isPdf ? " (PDF)" : ""}</a>`);
+  return `<article class="event${past ? " is-past" : ""}${poster ? " has-poster" : ""}">
     <div class="datebox" aria-hidden="true">
       <span class="m">${LANG === "ja" ? (d.getMonth() + 1) + "月" : MONTHS_EN[d.getMonth()]}</span>
       <span class="d">${d.getDate()}</span>
@@ -30,15 +44,16 @@ function eventHTML(e) {
     </div>
     <div class="ev-body">
       <div class="chips">
-        <span class="chip">${fmt}</span><span class="chip">${esc(e.langs)}</span>
+        <span class="chip">${formatLabel(e.format)}</span>${e.langs ? `<span class="chip">${esc(e.langs)}</span>` : ""}
         ${past ? `<span class="chip past">${L("Past", "終了")}</span>` : ""}
         ${e.sample ? `<span class="chip sample">${L("Sample", "サンプル")}</span>` : ""}
       </div>
       <h3>${esc(t(e.title))}</h3>
       <div class="ev-meta"><span>${fmtLong(e.date)}${e.time ? " · " + esc(e.time) : ""}</span><span>${esc(t(e.place))}</span></div>
       <p>${esc(t(e.desc))}</p>
+      ${actions.length ? `<div class="btns">${actions.join("")}</div>` : ""}
     </div>
-    <div class="ev-act">${past ? "" : `<a class="btn" href="#contact" data-nav="contact" data-topic="event" data-event="${esc(t(e.title))}">${L("Register", "申し込む")}</a>`}</div>
+    ${poster ? `<button type="button" class="ev-poster" data-poster="${i}"><img src="${esc(poster)}" alt="${esc(L("Poster: ", "ポスター：") + t(e.title))}" loading="lazy"><span>${L("View poster", "ポスターを拡大")}</span></button>` : ""}
   </article>`;
 }
 const emptyHTML = (msg) => `<div class="empty"><img src="haru.png" alt=""><span>${msg}</span></div>`;
@@ -127,6 +142,7 @@ function setLang(l) {
 
 function show(page, opts = {}) {
   if (!PAGES.includes(page)) page = "home";
+  closeSecMenu();
   $$(".page").forEach((p) => { p.hidden = p.dataset.page !== page; });
   $$(".nav a").forEach((a) => { if (a.dataset.nav === page) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   $("#site-nav").classList.remove("open");
@@ -169,6 +185,11 @@ function buildCompose() {
 }
 
 document.addEventListener("click", (ev) => {
+  const tg = ev.target.closest(".sec-toggle"); if (tg) { openSecMenu(tg); return; }
+  const jump = ev.target.closest("[data-jump]");
+  if (jump) { closeSecMenu(); const el = document.getElementById(jump.dataset.jump); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+  if (secToggle && !ev.target.closest("#sec-menu")) closeSecMenu();
+  const pv = ev.target.closest("[data-poster]"); if (pv) { openPoster(Number(pv.dataset.poster)); return; }
   const nav = ev.target.closest("[data-nav]");
   if (nav) {
     ev.preventDefault();
@@ -187,6 +208,39 @@ document.addEventListener("click", (ev) => {
   const pb = ev.target.closest("[data-post]"); if (pb) { openPost(Number(pb.dataset.post)); return; }
   const cb = ev.target.closest("[data-copy]"); if (cb) { copyText(SITE.email, cb); return; }
 });
+
+function openPoster(i) {
+  const e = EVENTS[i]; if (!e) return;
+  const src = e.poster || e.photo;
+  $("#pv-title").textContent = t(e.title);
+  $("#pv-img").src = src; $("#pv-img").alt = L("Poster: ", "ポスター：") + t(e.title);
+  $("#pv-open").href = src;
+  const d = $("#poster-view");
+  if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+}
+$("#pv-close").addEventListener("click", () => { const d = $("#poster-view"); d.close ? d.close() : d.removeAttribute("open"); });
+$("#poster-view").addEventListener("click", (e) => { if (e.target === e.currentTarget && e.currentTarget.close) e.currentTarget.close(); });
+
+/* About page: jump menu opened from the three-bar mark */
+let secToggle = null;
+function closeSecMenu() {
+  $("#sec-menu").hidden = true;
+  if (secToggle) { secToggle.setAttribute("aria-expanded", "false"); secToggle = null; }
+}
+function openSecMenu(btn) {
+  const menu = $("#sec-menu");
+  if (secToggle === btn) { closeSecMenu(); return; }
+  closeSecMenu();
+  menu.hidden = false;
+  const r = btn.getBoundingClientRect();
+  const maxLeft = document.documentElement.clientWidth - menu.offsetWidth - 16;
+  menu.style.top = (window.scrollY + r.bottom + 8) + "px";
+  menu.style.left = Math.max(16, Math.min(window.scrollX + r.left, maxLeft)) + "px";
+  btn.setAttribute("aria-expanded", "true"); secToggle = btn;
+  const first = menu.querySelector("button"); if (first) first.focus({ preventScroll: true });
+}
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && secToggle) { const b = secToggle; closeSecMenu(); b.focus(); } });
+window.addEventListener("resize", closeSecMenu);
 
 function openPost(i) {
   const p = POSTS[i]; if (!p) return;

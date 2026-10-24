@@ -369,6 +369,32 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
 .foot-nav a:hover { text-decoration: underline; }
 .disclaimer { font-size: var(--s-xs); line-height: 1.7; color: var(--muted); max-width: 92ch; border-top: 1px solid #CCD6EC; padding-top: 20px; display: grid; gap: 8px; }
 .page[hidden] { display: none !important; }
+/* Event posters and reports */
+.event { grid-template-columns: 92px 1fr; }
+.event.has-poster { grid-template-columns: 92px 1fr 180px; }
+.ev-body .btns { margin-top: 6px; }
+.ev-poster { appearance: none; border: 0; padding: 0; background: none; cursor: zoom-in; display: grid; gap: 6px; justify-items: center; align-self: start; }
+.ev-poster img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); box-shadow: 0 6px 16px rgba(20,47,76,.10); transition: transform .15s ease; }
+.ev-poster:hover img { transform: translateY(-2px); }
+.ev-poster span { font-size: .75rem; font-weight: 600; color: var(--blue); }
+.btn .ico-doc { width: 16px; height: 16px; flex: none; }
+@media (max-width: 680px) { .event, .event.has-poster { grid-template-columns: 70px 1fr; } .ev-poster { grid-column: 2; justify-self: start; width: 100%; max-width: 260px; } }
+dialog.poster-view { width: min(920px, calc(100vw - 32px)); }
+.pv-inner { padding: 18px 18px 22px; display: grid; gap: 12px; }
+.pv-inner img { width: auto; max-width: 100%; max-height: calc(100vh - 190px); margin-inline: auto; border-radius: 10px; }
+.pv-foot { display: flex; justify-content: center; }
+/* About: section jump menu opened from the three-bar mark */
+#page-about section[id] { scroll-margin-top: 88px; }
+.sec-toggle { appearance: none; display: inline-flex; align-items: center; gap: 5px; padding: 4px 7px; margin: -4px 0; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--blue); cursor: pointer; }
+.sec-toggle svg { width: 22px; height: 16px; }
+.sec-toggle::after { content: ""; width: 6px; height: 6px; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(45deg); margin: -3px 2px 0 1px; }
+.sec-toggle:hover, .sec-toggle[aria-expanded="true"] { background: var(--sky-soft); border-color: var(--sky); }
+.sec-menu { position: absolute; z-index: 30; min-width: 240px; max-width: calc(100vw - 32px); background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 16px 40px rgba(20,47,76,.18); padding: 8px; display: grid; gap: 2px; }
+.sec-menu[hidden] { display: none !important; }
+.sec-menu-title { font-family: var(--f-display); font-size: .6875rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); padding: 6px 12px 4px; }
+.sec-menu button { appearance: none; border: 0; background: transparent; text-align: left; font: 600 var(--s-sm)/1.4 var(--f-body); color: var(--navy); padding: 10px 12px; border-radius: 10px; cursor: pointer; display: flex; gap: 10px; align-items: center; }
+.sec-menu button::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex: none; }
+.sec-menu button:hover, .sec-menu button:focus-visible { background: var(--sky-soft); outline: none; }
 .hero h1 .swoosh { white-space: nowrap; }
 html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; font-size: .875rem; letter-spacing: .04em; line-height: 1.4; }
 </style>
@@ -567,7 +593,7 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
   <div class="page-band">
     <div class="wrap">
       <div class="page-head">
-        <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">About us</span><span class="ja">私たちについて</span></span>
+        <span class="eyebrow"><button type="button" class="sec-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="sec-menu" aria-label="Jump to a section / 項目へ移動" title="Jump to a section / 項目へ移動"><svg aria-hidden="true"><use href="#bars"/></svg></button><span class="en">About us</span><span class="ja">私たちについて</span></span>
         <h1><span class="en">A youth network for Japan–U.S.–Korea cooperation</span><span class="ja">日米韓協力のためのユース・ネットワーク</span></h1>
         <p class="lede"><span class="en">Who we are, how our journey began, what we have done so far, and the people behind the Japan Branch.</span><span class="ja">私たちが何者で、どのように歩んできたのか。これまでの活動と、日本支部を担うメンバーを紹介します。</span></p>
       </div>
@@ -575,11 +601,33 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
     </div>
   </div>
 
-  <section class="block">
+  <section class="block" id="about-goals">
+    <div class="wrap split">
+      <div class="block-head" style="margin-bottom:0">
+        <span class="eyebrow"><button type="button" class="sec-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="sec-menu" aria-label="Jump to a section / 項目へ移動" title="Jump to a section / 項目へ移動"><svg aria-hidden="true"><use href="#bars"/></svg></button><span class="en">Our goals</span><span class="ja">事業の目標</span></span>
+        <h2><span class="en">Two lasting values we aim to leave behind</span><span class="ja">社会に残したい、二つの価値</span></h2>
+        <p class="muted"><span class="en">TogetherWeTri works toward two goals that outlast any single event or administration.</span><span class="ja">TogetherWeTriは、一度きりのイベントや特定の政権を超えて続く、二つの目標に取り組んでいます。</span></p>
+      </div>
+      <div class="values">
+        <div class="value">
+          <span class="n"><span class="en">Goal one</span><span class="ja">目標 1</span></span>
+          <h3><span class="en">A platform for practice</span><span class="ja">実践のためのプラットフォーム</span></h3>
+          <p><span class="en">Translating government-to-government dialogue into youth-led projects, events and actions.</span><span class="ja">政府間の対話を、若者主導のプロジェクト・イベント・行動へとつなげます。</span></p>
+        </div>
+        <div class="value two">
+          <span class="n"><span class="en">Goal two</span><span class="ja">目標 2</span></span>
+          <h3><span class="en">A network of trust</span><span class="ja">信頼のネットワーク</span></h3>
+          <p><span class="en">Lasting ties among next-generation leaders that are not swayed by political circumstances.</span><span class="ja">政治状況に左右されない、次世代リーダー同士の持続的なつながりを育てます。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block tint" id="about-background">
     <div class="wrap split">
       <div style="display:grid;gap:24px">
         <div class="block-head" style="margin-bottom:0">
-          <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Background</span><span class="ja">設立の背景</span></span>
+          <span class="eyebrow"><button type="button" class="sec-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="sec-menu" aria-label="Jump to a section / 項目へ移動" title="Jump to a section / 項目へ移動"><svg aria-hidden="true"><use href="#bars"/></svg></button><span class="en">Background</span><span class="ja">設立の背景</span></span>
           <h2><span class="en">Closing the gap between summits and society</span><span class="ja">首脳会談と社会のあいだのギャップを埋める</span></h2>
         </div>
         <div class="about-logo"><img src="logo.png" width="547" height="638" alt="TogetherWeTri Japan logo"></div>
@@ -610,10 +658,10 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
     </div>
   </section>
 
-  <section class="block tint">
+  <section class="block" id="about-journey">
     <div class="wrap">
       <div class="block-head">
-        <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">How we got here</span><span class="ja">これまでの歩み</span></span>
+        <span class="eyebrow"><button type="button" class="sec-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="sec-menu" aria-label="Jump to a section / 項目へ移動" title="Jump to a section / 項目へ移動"><svg aria-hidden="true"><use href="#bars"/></svg></button><span class="en">How we got here</span><span class="ja">これまでの歩み</span></span>
         <h2><span class="en">Turning ideas into action</span><span class="ja">アイデアを、アクションへ</span></h2>
       </div>
       <p class="quote"><span class="en">How can we sustain this trilateral dialogue beyond a single summit?</span><span class="ja">一度きりのサミットを超えて、三国間の対話をどう持続させるか？</span></p>
@@ -643,8 +691,9 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
         </div>
         <div class="tl">
           <span class="when"><span class="en">August 2025 – September 2026</span><span class="ja">2025年8月〜2026年9月</span></span>
-          <h3><span class="en">AEIF-funded project in Korea</span><span class="ja">韓国支部によるAEIF助成プロジェクト</span></h3>
-          <p><span class="en">The Korea Branch carries out a project with seed funding from the U.S. Department of State's Alumni Engagement Innovation Fund (AEIF), including regional cooperation roundtables in Korea and Japan.</span><span class="ja">韓国支部が、米国国務省の同窓生エンゲージメント・イノベーション基金（AEIF）のシード資金を受け、韓国と日本での地域協力ラウンドテーブルなどのプロジェクトを実施しました。</span></p>
+          <h3><span class="en">AEIF-funded project by the Korea Branch</span><span class="ja">韓国支部によるAEIF採択事業</span></h3>
+          <p><span class="en">The Korea Branch is named an Alumni Engagement Innovation Fund (AEIF) 2025 awardee by the U.S. Department of State. Through the project, it holds 6 regional cooperation roundtables in Korea and Japan, engaging more than 500 young people.</span><span class="ja">韓国支部が、米国国務省の同窓生エンゲージメント・イノベーション基金（AEIF）2025年度の採択を受けて事業を実施しました。韓国と日本で6回の地域協力ラウンドテーブルを開催し、500名以上の若者が参加しました。</span></p>
+          <p><a href="https://togetherwetri-japan.github.io/togetherwetri/" data-global-link><span class="en">More about the AEIF project on the global site ↗</span><span class="ja">AEIF採択事業の詳細は全体サイトへ ↗</span></a></p>
         </div>
         <div class="tl now">
           <span class="when"><span class="en">March 2026</span><span class="ja">2026年3月</span></span>
@@ -655,55 +704,10 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
     </div>
   </section>
 
-  <section class="block">
-    <div class="wrap split">
-      <div style="display:grid;gap:18px;align-content:start">
-        <div class="block-head" style="margin-bottom:0">
-          <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Alumni Engagement Innovation Fund</span><span class="ja">同窓生エンゲージメント・イノベーション基金</span></span>
-          <h2><span class="en">AEIF awardee, 2025–26</span><span class="ja">AEIF 採択事業（2025〜26年）</span></h2>
-        </div>
-        <p class="muted"><span class="en">TogetherWeTri was named an Alumni Engagement Innovation Fund 2025 awardee by the U.S. Department of State for the project “Shaping a Safer, Stronger, and More Prosperous Future for U.S.-ROK Ties at the American Corners.” The Korea Branch carried out the project from August 2025 to September 2026.</span><span class="ja">TogetherWeTriは、米国国務省の同窓生エンゲージメント・イノベーション基金（AEIF）2025年度の採択団体に選ばれました。事業名は「Shaping a Safer, Stronger, and More Prosperous Future for U.S.-ROK Ties at the American Corners」です。韓国支部が、2025年8月から2026年9月まで事業を実施しました。</span></p>
-        <p class="grant"><span class="en">U.S. Department of State AEIF grant</span><span class="ja">米国国務省 AEIF助成額</span> <b>$58,000</b></p>
-        <h3 style="font-size:1.0625rem;margin-top:6px"><span class="en">Project goals</span><span class="ja">事業の目標</span></h3>
-        <ul class="goals">
-          <li><svg aria-hidden="true"><use href="#bars"/></svg><span><span class="en">Connecting young trilateral leaders</span><span class="ja">若き三国間リーダーをつなぐ</span></span></li>
-          <li><svg aria-hidden="true"><use href="#bars"/></svg><span><span class="en">Strengthening U.S.–ROK–Japan youth networks</span><span class="ja">日米韓の若者ネットワークを強化する</span></span></li>
-          <li><svg aria-hidden="true"><use href="#bars"/></svg><span><span class="en">Building a sustainable trilateral dialogue platform</span><span class="ja">持続可能な三国間対話の場をつくる</span></span></li>
-        </ul>
-      </div>
-      <div class="aeif-media">
-        <img class="cert" src="aeif-certificate.jpg" width="992" height="742" loading="lazy" alt="U.S. Department of State Alumni Engagement Innovation Fund 2025 Awardee certificate for TogetherWeTri">
-        <img src="aeif-award.jpg" width="1000" height="667" loading="lazy" alt="TogetherWeTri members holding the AEIF certificate between U.S. and Korean flags">
-      </div>
-    </div>
-  </section>
-
-  <section class="block tint">
+  <section class="block tint" id="about-members">
     <div class="wrap">
       <div class="block-head">
-        <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Our impact in action</span><span class="ja">活動の成果</span></span>
-        <h2><span class="en">Let's do it together</span><span class="ja">一緒にやりましょう</span></h2>
-        <p class="slogan" lang="ko">같이 합시다 · 一緒にやりましょう · Let's do it together</p>
-      </div>
-      <div class="stats">
-        <div class="stat">
-          <span class="big">6</span>
-          <h3><span class="en">Regional cooperation roundtables</span><span class="ja">地域協力ラウンドテーブル</span></h3>
-          <p><span class="en">Expanding dialogue across cities and sectors in Korea and Japan.</span><span class="ja">韓国と日本で、都市・分野を越えて対話を広げました。</span></p>
-        </div>
-        <div class="stat">
-          <span class="big">500+</span>
-          <h3><span class="en">Youth and university students engaged</span><span class="ja">参加した若者・大学生</span></h3>
-          <p><span class="en">From diverse academic backgrounds.</span><span class="ja">多様な学問分野から参加しました。</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block">
-    <div class="wrap">
-      <div class="block-head">
-        <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Our team</span><span class="ja">メンバー紹介</span></span>
+        <span class="eyebrow"><button type="button" class="sec-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="sec-menu" aria-label="Jump to a section / 項目へ移動" title="Jump to a section / 項目へ移動"><svg aria-hidden="true"><use href="#bars"/></svg></button><span class="en">Our team</span><span class="ja">メンバー紹介</span></span>
         <h2><span class="en">The people behind the Japan Branch</span><span class="ja">日本支部のメンバー</span></h2>
       </div>
       <div class="note" id="members-note"><b><span class="en">Template</span><span class="ja">テンプレート</span></b><span><span class="en">These profiles are placeholders. Replace them with your team's names, roles and photos.</span><span class="ja">以下は仮のプロフィールです。メンバーの氏名・役職・写真に差し替えてください。</span></span></div>
@@ -711,7 +715,7 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
     </div>
   </section>
 
-  <section class="block" style="padding-top:8px">
+  <section class="block">
     <div class="wrap">
       <div class="cta"><div class="cta-inner">
         <div style="display:grid;gap:12px;justify-items:start">
@@ -894,6 +898,23 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
     <div class="prose" id="reader-body"></div>
   </div>
 </dialog>
+<dialog class="reader poster-view" id="poster-view" aria-labelledby="pv-title">
+  <div class="pv-inner">
+    <div class="reader-top">
+      <span class="eyebrow" id="pv-title"></span>
+      <button type="button" class="close-btn" id="pv-close"><span class="en">Close</span><span class="ja">閉じる</span></button>
+    </div>
+    <img id="pv-img" src="" alt="">
+    <div class="pv-foot"><a class="btn ghost" id="pv-open" href="#" target="_blank" rel="noopener"><span class="en">Open full size ↗</span><span class="ja">原寸で開く ↗</span></a></div>
+  </div>
+</dialog>
+<div class="sec-menu" id="sec-menu" role="menu" hidden>
+  <p class="sec-menu-title"><span class="en">On this page</span><span class="ja">このページの項目</span></p>
+  <button type="button" role="menuitem" data-jump="about-goals"><span class="en">Our goals</span><span class="ja">事業の目標</span></button>
+  <button type="button" role="menuitem" data-jump="about-background"><span class="en">Background</span><span class="ja">設立の背景</span></button>
+  <button type="button" role="menuitem" data-jump="about-journey"><span class="en">How we got here</span><span class="ja">これまでの歩み</span></button>
+  <button type="button" role="menuitem" data-jump="about-members"><span class="en">Our team</span><span class="ja">メンバー紹介</span></button>
+</div>
 </main>
 
 <footer>

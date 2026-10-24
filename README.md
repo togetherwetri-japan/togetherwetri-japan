@@ -199,3 +199,43 @@ GitHub で `data.js` を開き「**History**」を押すと、過去の版がす
 3. ドメイン会社の管理画面で、GitHub の案内どおりに DNS を設定します。
 
 設定するまでは、`github.io` のURLのまま無料で運用できます。
+
+---
+
+## 11. イベントのポスターとレポートを載せる
+
+`data.js` の各イベントに、次の2つの項目を追加できます。
+
+| 項目 | 書き方 | 表示 |
+|---|---|---|
+| `photo`（または `poster`） | `photo: "poster-sendai1010.jpg"` | イベントの右側にポスターが表示され、押すと拡大されます |
+| `report` | `report: "report-sendai1010.pdf"` または `report: "https://drive.google.com/..."` | 「イベントレポート」ボタンが表示され、押すと別のタブで開きます |
+
+### 例
+
+```js
+  { date: "2026-10-10", time: "14:00–17:00 JST", sample: false,
+    title: { en: "...", ja: "..." },
+    place: { en: "...", ja: "..." }, format: "inperson / online", langs: "EN / JA",
+    desc: { en: "...", ja: "..." },
+    photo: "poster-sendai1010.jpg",
+    report: "https://drive.google.com/file/d/xxxxxxxx/view" },
+```
+
+### レポートの置き方
+
+- **PDF をサイトに置く場合：** PDF をリポジトリのトップページにアップロードし、`report: "ファイル名.pdf"` と書きます。PDF の場合はボタンに「(PDF)」と付きます。GitHub の画面からアップロードできるのは 1 ファイル 25MB までです。
+- **Google ドライブの場合：** ファイルを右クリック →「共有」→ 一般的なアクセスを「**リンクを知っている全員**」に変更してからリンクをコピーし、`report: "https://drive.google.com/..."` に貼り付けます。共有設定を変えないと、閲覧者には「アクセス権が必要です」と表示されてしまいます。
+
+### 開催形式（format）の書き方
+
+| 書き方 | 表示 |
+|---|---|
+| `"inperson"` | 対面 |
+| `"online"` | オンライン |
+| `"inperson / online"` または `"hybrid"` | ハイブリッド（対面・オンライン） |
+
+### ポスター画像のコツ
+
+- **画像形式：** 印刷用の CMYK 形式の JPG は、ブラウザによって色がずれることがあります。RGB で書き出してください。
+- **サイズ：** 長辺 1600px 程度、1MB 以下が目安です。大きすぎるとページの表示が遅くなります。
