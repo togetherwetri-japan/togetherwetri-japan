@@ -247,6 +247,9 @@ $("#contact-form").addEventListener("submit", async (ev) => {
 });
 $("#copy-compose").addEventListener("click", (e) => copyText($("#compose-text").textContent, e.currentTarget));
 
+// Link to the overall TogetherWeTri site. data.js の SITE に globalUrl: "https://..." を書くと、行き先を変えられます。
+if (typeof SITE !== "undefined" && SITE.globalUrl) $$("[data-global-link]").forEach((a) => { a.href = SITE.globalUrl; });
+
 let saved = "en";
 try { saved = localStorage.getItem("twt-lang") || "en"; } catch (e) {}
 $("#yr").textContent = new Date().getFullYear();

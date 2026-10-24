@@ -7,7 +7,7 @@
 <meta name="description" content="TogetherWeTri Japan Branch connects students, young professionals and local communities in Japan with peers in the United States and Korea. 日米韓ヤング・リーダーズ・サミット（YTL）修了生によるユース・イニシアティブの日本支部です。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="TogetherWeTri Japan">
-<meta property="og:description" content="From summit statements to youth-led action. 首脳間の対話を、若者の実践へ。">
+<meta property="og:description" content="From summit statements to youth-led action. 首脳間の対話を、若者たちの行動へ。">
 <!-- 公開後、og:image を絶対URL（例: https://ユーザー名.github.io/リポジトリ名/og.png）に書き換えると、SNSでのリンク表示に画像が出ます -->
 <meta property="og:image" content="og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -84,6 +84,8 @@ html[data-lang="ja"] .eyebrow { letter-spacing: .08em; }
 .nav a { color: var(--ink); text-decoration: none; font-size: var(--s-sm); font-weight: 500; padding: 8px 12px; border-radius: 999px; white-space: nowrap; }
 .nav a:hover { background: var(--sky-soft); }
 .nav a[aria-current="page"] { color: var(--red); background: #FBECEC; }
+.nav a.nav-ext { color: var(--blue); font-weight: 700; }
+.foot-ext { color: var(--red) !important; }
 .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; flex: none; background: var(--paper); }
 .lang button { appearance: none; border: 0; background: transparent; color: var(--muted); font: 600 var(--s-xs)/1 var(--f-body); padding: 7px 11px; border-radius: 999px; cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--navy); color: #fff; }
@@ -269,6 +271,35 @@ dialog.reader::backdrop { background: rgba(20, 47, 76, .55); }
 .tl .when { font-family: var(--f-display); font-weight: 700; font-size: .75rem; letter-spacing: .16em; color: var(--red); text-transform: uppercase; }
 .tl h3 { font-size: 1.125rem; }
 .tl p { font-size: var(--s-sm); color: var(--muted); max-width: 60ch; }
+/* Journey, AEIF and impact */
+.quote { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.45rem, 3.3vw, 2.25rem); line-height: 1.3; color: var(--navy); max-width: 32ch; text-wrap: balance; margin: 0; }
+html[data-lang="ja"] .quote { font-family: var(--f-body); font-weight: 900; max-width: 24em; }
+.quote::before, .quote::after { color: var(--red); }
+.quote::before { content: "“"; } .quote::after { content: "”"; }
+html[data-lang="ja"] .quote::before { content: "「"; } html[data-lang="ja"] .quote::after { content: "」"; }
+.quote-note { color: var(--muted); max-width: 62ch; margin: 14px 0 44px; }
+.timeline.wide { max-width: 900px; }
+.tl.has-photo { grid-template-columns: 1fr minmax(0, 320px); grid-template-rows: auto auto 1fr; column-gap: 28px; }
+.tl.has-photo > :not(figure) { grid-column: 1; }
+.tl.has-photo figure { grid-column: 2; grid-row: 1 / span 3; margin: 0; align-self: start; }
+.tl figure img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
+@media (max-width: 720px) { .tl.has-photo { grid-template-columns: 1fr; grid-template-rows: none; } .tl.has-photo figure { grid-column: 1; grid-row: auto; margin-top: 8px; } }
+.aeif-media { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; }
+.aeif-media img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); }
+.aeif-media img.cert { object-fit: contain; }
+@media (max-width: 480px) { .aeif-media { grid-template-columns: 1fr; } }
+.grant { display: inline-flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; padding: 10px 14px; border-radius: 12px; background: var(--sky-soft); color: var(--navy); font-size: var(--s-sm); font-weight: 600; justify-self: start; }
+.grant b { font-family: var(--f-display); font-weight: 800; font-size: 1.25rem; color: var(--red); }
+.goals { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.goals li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-weight: 600; color: var(--navy); }
+.goals li svg { width: 22px; height: 16px; margin-top: 6px; }
+.slogan { font-weight: 700; color: var(--red); font-size: var(--s-md); }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.stat { display: grid; grid-template-columns: auto 1fr; gap: 4px 20px; align-items: center; padding: 24px 26px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); min-width: 0; }
+.stat .big { grid-row: span 2; font-family: var(--f-display); font-weight: 800; font-size: clamp(2.6rem, 6vw, 3.6rem); line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; }
+.stat h3 { font-size: 1.0625rem; }
+.stat p { font-size: var(--s-sm); color: var(--muted); }
+@media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
 .about-logo { display: grid; place-items: center; padding: 28px; background: var(--paper); border-radius: 22px; border: 1px solid var(--line); }
 .about-logo img { width: 100%; max-width: 230px; height: auto; }
 
@@ -338,6 +369,8 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
 .foot-nav a:hover { text-decoration: underline; }
 .disclaimer { font-size: var(--s-xs); line-height: 1.7; color: var(--muted); max-width: 92ch; border-top: 1px solid #CCD6EC; padding-top: 20px; display: grid; gap: 8px; }
 .page[hidden] { display: none !important; }
+.hero h1 .swoosh { white-space: nowrap; }
+html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; font-size: .875rem; letter-spacing: .04em; line-height: 1.4; }
 </style>
 </head>
 <body>
@@ -364,6 +397,7 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
       <a href="#events" data-nav="events"><span class="en">Events</span><span class="ja">イベント</span></a>
       <a href="#news" data-nav="news"><span class="en">News &amp; Newsletter</span><span class="ja">ニュース</span></a>
       <a href="#contact" data-nav="contact"><span class="en">Contact</span><span class="ja">お問い合わせ</span></a>
+      <a class="nav-ext" href="https://togetherwetri-japan.github.io/togetherwetri/" data-global-link><span class="en">Global ↗</span><span class="ja">全体サイト ↗</span></a>
     </nav>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" id="lang-en" data-lang="en" aria-pressed="true">EN</button>
@@ -400,36 +434,26 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
     </div>
   </section>
 
-  <section class="block" style="padding-top:32px">
-    <div class="wrap">
-      <div class="facts">
-        <div class="fact"><span class="k"><span class="en">Founded</span><span class="ja">設立</span></span><span class="v"><span class="en">2025, in Korea</span><span class="ja">2025年・韓国</span></span></div>
-        <div class="fact"><span class="k"><span class="en">Founded by</span><span class="ja">設立者</span></span><span class="v"><span class="en">YTL Summit alumni</span><span class="ja">YTLサミット修了生</span></span></div>
-        <div class="fact"><span class="k"><span class="en">Japan Branch</span><span class="ja">日本支部</span></span><span class="v"><span class="en">Active since March 2026</span><span class="ja">2026年3月より活動開始</span></span></div>
-        <div class="fact"><span class="k"><span class="en">Countries</span><span class="ja">対象国</span></span><span class="v"><span class="en">Japan · U.S. · Korea</span><span class="ja">日本・米国・韓国</span></span></div>
-      </div>
-    </div>
-  </section>
 
   <section class="block" style="padding-top:24px">
     <div class="wrap split">
       <div class="block-head" style="margin-bottom:0">
         <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Why we exist</span><span class="ja">私たちの問題意識</span></span>
-        <h2><span class="en">Trilateral cooperation is agreed at the top. We bring it to the ground.</span><span class="ja">日米韓協力は首脳レベルで合意されている。私たちはそれを現場へ届けます。</span></h2>
+        <h2><span class="en">Trilateral cooperation is agreed at the top. We turn them into action.</span><span class="ja">日米韓の協力を、首脳間の合意から現場での実践へ。</span></h2>
         <p class="muted">
-          <span class="en">Since the 2023 Camp David Summit, leaders have named economic security and advanced technology as shared priorities. Most of that work still happens in high-level government dialogue. We build the youth and community layer underneath it: relationships of trust that hold regardless of which administration is in office.</span>
-          <span class="ja">2023年のキャンプ・デービッド首脳会談以降、経済安全保障と先端技術は日米韓共通の優先課題とされてきました。しかしその多くは、いまも政府間の高官対話にとどまっています。私たちは、その下に若者と地域社会の層をつくります。どの政権であっても揺らがない信頼関係です。</span>
+          <span class="en">Since the 2023 Camp David Summit, leaders have reaffirmed the importance of trilateral cooperation across a range of shared priorities. Much of this cooperation takes place through high-level government dialogue. We work to build the people-to-people ties that keep trilateral cooperation strong across administrations.</span>
+          <span class="ja">2023年のキャンプ・デービッド首脳会談以降、日米韓の首脳は、幅広い共通課題における三か国協力の重要性を改めて確認してきました。こうした協力の多くは、政府間のハイレベルな対話を通じて進められています。私たちは、政権が変わっても揺らぐことのない日米韓協力を支えるため、若者や市民の間に、人と人とのつながりを築いていきます。</span>
         </p>
         <p><a href="#about" data-nav="about"><span class="en">Read our full background →</span><span class="ja">設立の背景を読む →</span></a></p>
       </div>
       <div class="values">
         <div class="value">
-          <span class="n"><span class="en">Value one</span><span class="ja">価値 その1</span></span>
+          <span class="n"><span class="en">Value one</span><span class="ja">私たちが大切にすること 1</span></span>
           <h3><span class="en">A platform for practice</span><span class="ja">実践のためのプラットフォーム</span></h3>
-          <p><span class="en">Translating government-to-government dialogue into youth-led projects, events and research.</span><span class="ja">政府間の対話を、若者主導のプロジェクト・イベント・調査へとつなげます。</span></p>
+          <p><span class="en">Translating government-to-government dialogue into youth-led projects, events and actions.</span><span class="ja">政府間の対話を、若者主導のプロジェクト・イベント・行動へとつなげます。</span></p>
         </div>
         <div class="value two">
-          <span class="n"><span class="en">Value two</span><span class="ja">価値 その2</span></span>
+          <span class="n"><span class="en">Value two</span><span class="ja">私たちが大切にすること 2</span></span>
           <h3><span class="en">A network of trust</span><span class="ja">信頼のネットワーク</span></h3>
           <p><span class="en">Lasting ties among next-generation leaders that are not swayed by political circumstances.</span><span class="ja">政治状況に左右されない、次世代リーダー同士の持続的なつながりを育てます。</span></p>
         </div>
@@ -448,19 +472,19 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
           <img src="hanul.png" width="139" height="136" alt="Hanul, a blue tiger cub with red and white stripes">
           <span class="name">Hanul</span>
           <span class="who"><span class="en">Korea</span><span class="ja">韓国</span></span>
-          <p><span class="en">A blue tiger with the red and white of the Taegukgi in its stripes.</span><span class="ja">太極旗の赤と白を縞模様にまとった、青いトラ。</span></p>
+          <p><span class="en">Character description.</span><span class="ja">キャラクター説明。</span></p>
         </div>
         <div class="mascot hank">
           <img src="hank.png" width="145" height="142" alt="Hank, a navy tiger cub with stars and red stripes">
           <span class="name">Hank</span>
           <span class="who"><span class="en">United States</span><span class="ja">米国</span></span>
-          <p><span class="en">A navy tiger covered in stars and stripes.</span><span class="ja">星条旗の星とストライプをまとった、紺色のトラ。</span></p>
+          <p><span class="en">Character description. </span><span class="ja">キャラクター説明。</span></p>
         </div>
         <div class="mascot haru">
           <img src="haru.png" width="164" height="139" alt="Haru, a red tiger cub with cherry blossom markings">
           <span class="name">Haru</span>
           <span class="who"><span class="en">Japan</span><span class="ja">日本</span></span>
-          <p><span class="en">A red tiger with cherry blossoms in its fur.</span><span class="ja">桜の花模様をまとった、赤いトラ。</span></p>
+          <p><span class="en">Character description.</span><span class="ja">キャラクター説明。</span></p>
         </div>
       </div>
     </div>
@@ -476,22 +500,22 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
         <div class="program">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M19 9h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-3.5-3"/></svg></span>
           <h3><span class="en">Dialogues &amp; workshops</span><span class="ja">ダイアローグ・ワークショップ</span></h3>
-          <p><span class="en">Trilateral sessions on economic security, supply chains and advanced technology, run by young people for young people.</span><span class="ja">経済安全保障、サプライチェーン、先端技術をテーマに、若者が企画し若者が参加する日米韓のセッション。</span></p>
+          <p><span class="en">Youth-led, youth-focused dialogue sessions exploring social, local, and global issues through a trilateral lens.</span><span class="ja">社会・地域・国際課題などをテーマに、若者が企画し、若者が参加する日米韓の対話セッション。</span></p>
         </div>
         <div class="program">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
-          <h3><span class="en">Local community projects</span><span class="ja">地域プロジェクト</span></h3>
-          <p><span class="en">Taking trilateral topics beyond Tokyo, to campuses, towns and community groups across Japan.</span><span class="ja">東京にとどまらず、全国の大学・地域・市民団体へ日米韓のテーマを届けます。</span></p>
+          <h3><span class="en">Regional projects</span><span class="ja">地域プロジェクト</span></h3>
+          <p><span class="en">Bringing opportunities to explore Japan-U.S.-ROK cooperation through relatable topics to young people across Japan.</span><span class="ja">全国各地の若者に、日米韓の協力を身近なテーマから考える機会を届けます。</span></p>
         </div>
         <div class="program">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h8M9 17h6"/></svg></span>
           <h3><span class="en">Policy to practice</span><span class="ja">政策から実践へ</span></h3>
-          <p><span class="en">Short, readable briefs that unpack joint statements and what they mean for students, workers and local economies.</span><span class="ja">共同声明の内容と、それが学生・働き手・地域経済にとって何を意味するのかを、短く分かりやすく解説します。</span></p>
+          <p><span class="en">Making Japan-U.S.-ROK diplomatic and policy issues accessible and easy for young people to understand.</span><span class="ja">日米韓の外交・政策課題を、若者にも分かりやすく解説します。</span></p>
         </div>
         <div class="program">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.8 7.2 6.3 15.8M13.2 7.2l4.5 8.6M7.5 18h9"/></svg></span>
           <h3><span class="en">Peer network</span><span class="ja">ピア・ネットワーク</span></h3>
-          <p><span class="en">Connecting YTL alumni, students and young professionals in Tokyo, Seoul and Washington.</span><span class="ja">東京・ソウル・ワシントンのYTL修了生、学生、若手社会人をつなぎます。</span></p>
+          <p><span class="en">Connecting YTL alumni, students, and young professionals all over the globe with diverse interests and experiences.</span><span class="ja">世界中にいる多様な関心や経験を持つYTL修了生、学生、若手社会人をつなぎます。</span></p>
         </div>
       </div>
     </div>
@@ -545,7 +569,7 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
       <div class="page-head">
         <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">About us</span><span class="ja">私たちについて</span></span>
         <h1><span class="en">A youth network for Japan–U.S.–Korea cooperation</span><span class="ja">日米韓協力のためのユース・ネットワーク</span></h1>
-        <p class="lede"><span class="en">Who we are, why we started, and the people behind the Japan Branch.</span><span class="ja">私たちが何者で、なぜ活動を始めたのか。そして日本支部を担うメンバーを紹介します。</span></p>
+        <p class="lede"><span class="en">Who we are, how our journey began, what we have done so far, and the people behind the Japan Branch.</span><span class="ja">私たちが何者で、どのように歩んできたのか。これまでの活動と、日本支部を担うメンバーを紹介します。</span></p>
       </div>
       <div class="band-art" aria-hidden="true"><img src="hanul.png" alt=""><img src="hank.png" alt=""></div>
     </div>
@@ -581,26 +605,36 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
           <span class="en">With this challenge in mind, TogetherWeTri aims to leave behind two lasting values for society: first, a platform that translates government-to-government dialogue into youth-led practice; and second, a network of trust among next-generation leaders that is not swayed by political circumstances.</span>
           <span class="ja">この課題意識のもと、TogetherWeTriは社会に二つの価値を残すことを目指しています。第一に、政府間の対話を若者主導の実践へとつなげるプラットフォーム。第二に、政治状況に左右されない次世代リーダーの信頼のネットワークです。</span>
         </p>
+        <p><a href="https://togetherwetri-japan.github.io/togetherwetri/" data-global-link><span class="en">Learn about TogetherWeTri as a whole, including the Korea Branch ↗</span><span class="ja">韓国支部を含むTogetherWeTri全体については、全体サイトへ ↗</span></a></p>
       </div>
     </div>
   </section>
 
   <section class="block tint">
-    <div class="wrap split">
-      <div class="block-head" style="margin-bottom:0">
+    <div class="wrap">
+      <div class="block-head">
         <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">How we got here</span><span class="ja">これまでの歩み</span></span>
-        <h2><span class="en">Timeline</span><span class="ja">年表</span></h2>
+        <h2><span class="en">Turning ideas into action</span><span class="ja">アイデアを、アクションへ</span></h2>
       </div>
-      <div class="timeline">
+      <p class="quote"><span class="en">How can we sustain this trilateral dialogue beyond a single summit?</span><span class="ja">一度きりのサミットを超えて、三国間の対話をどう持続させるか？</span></p>
+      <p class="quote-note"><span class="en">This question is at the heart of TogetherWeTri: bridging the U.S., the ROK and Japan through public diplomacy.</span><span class="ja">この問いが、TogetherWeTriの活動の中心にあります。パブリック・ディプロマシーを通じて、日米韓をつなぎます。</span></p>
+      <div class="timeline wide">
         <div class="tl">
           <span class="when"><span class="en">August 18, 2023</span><span class="ja">2023年8月18日</span></span>
           <h3><span class="en">Camp David Summit</span><span class="ja">キャンプ・デービッド首脳会談</span></h3>
           <p><span class="en">The leaders of Japan, the United States and Korea hold their first standalone trilateral summit and set a framework for regular cooperation.</span><span class="ja">日米韓の首脳が初の単独での三か国首脳会談を開催し、定期的な協力の枠組みを打ち出しました。</span></p>
         </div>
-        <div class="tl">
-          <span class="when"><span class="en">2023 onward</span><span class="ja">2023年以降</span></span>
-          <h3><span class="en">Shared priorities, confirmed again and again</span><span class="ja">繰り返し確認される共通の優先課題</span></h3>
-          <p><span class="en">Japan–U.S. and Japan–Korea joint statements and summits name trilateral economic security and advanced-technology cooperation as a top priority.</span><span class="ja">日米・日韓の共同声明や首脳会談で、日米韓の経済安全保障と先端技術協力が最重要課題として示されます。</span></p>
+        <div class="tl has-photo">
+          <span class="when"><span class="en">July 2024 · Busan</span><span class="ja">2024年7月・釜山</span></span>
+          <h3><span class="en">Young Trilateral Leaders Summit in Busan</span><span class="ja">日米韓ヤング・リーダーズ・サミット（釜山）</span></h3>
+          <p><span class="en">Young leaders from the three countries gather for the YTL Summit in Busan, Korea.</span><span class="ja">三か国の若いリーダーが、韓国・釜山でのYTLサミットに集まりました。</span></p>
+          <figure><img src="journey-busan-2024.jpg" width="1200" height="734" loading="lazy" alt="Group photo of participants at the 2024 Young Trilateral Leaders Summit in Busan"></figure>
+        </div>
+        <div class="tl has-photo">
+          <span class="when"><span class="en">July 2025 · Osaka</span><span class="ja">2025年7月・大阪</span></span>
+          <h3><span class="en">Young Trilateral Leaders Summit in Osaka</span><span class="ja">日米韓ヤング・リーダーズ・サミット（大阪）</span></h3>
+          <p><span class="en">The YTL Summit is held in Osaka, Japan.</span><span class="ja">YTLサミットが大阪で開催されました。</span></p>
+          <figure><img src="journey-osaka-2025.jpg" width="864" height="462" loading="lazy" alt="Participants making heart gestures at the Young Trilateral Leaders Summit 2025 in Osaka"></figure>
         </div>
         <div class="tl">
           <span class="when">2025</span>
@@ -610,12 +644,57 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
         <div class="tl">
           <span class="when"><span class="en">August 2025 – September 2026</span><span class="ja">2025年8月〜2026年9月</span></span>
           <h3><span class="en">AEIF-funded project in Korea</span><span class="ja">韓国支部によるAEIF助成プロジェクト</span></h3>
-          <p><span class="en">The Korea Branch carries out a project with seed funding from the U.S. Department of State's Alumni Engagement Innovation Fund (AEIF).</span><span class="ja">韓国支部が、米国国務省の同窓生エンゲージメント・イノベーション基金（AEIF）のシード資金を受けてプロジェクトを実施しました。</span></p>
+          <p><span class="en">The Korea Branch carries out a project with seed funding from the U.S. Department of State's Alumni Engagement Innovation Fund (AEIF), including regional cooperation roundtables in Korea and Japan.</span><span class="ja">韓国支部が、米国国務省の同窓生エンゲージメント・イノベーション基金（AEIF）のシード資金を受け、韓国と日本での地域協力ラウンドテーブルなどのプロジェクトを実施しました。</span></p>
         </div>
         <div class="tl now">
           <span class="when"><span class="en">March 2026</span><span class="ja">2026年3月</span></span>
           <h3><span class="en">Japan Branch begins activities</span><span class="ja">日本支部、活動開始</span></h3>
           <p><span class="en">The Japan Branch starts building the network in Japan through events, local projects and a regular newsletter.</span><span class="ja">イベント、地域プロジェクト、定期ニュースレターを通じて、日本でのネットワークづくりを始めました。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap split">
+      <div style="display:grid;gap:18px;align-content:start">
+        <div class="block-head" style="margin-bottom:0">
+          <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Alumni Engagement Innovation Fund</span><span class="ja">同窓生エンゲージメント・イノベーション基金</span></span>
+          <h2><span class="en">AEIF awardee, 2025–26</span><span class="ja">AEIF 採択事業（2025〜26年）</span></h2>
+        </div>
+        <p class="muted"><span class="en">TogetherWeTri was named an Alumni Engagement Innovation Fund 2025 awardee by the U.S. Department of State for the project “Shaping a Safer, Stronger, and More Prosperous Future for U.S.-ROK Ties at the American Corners.” The Korea Branch carried out the project from August 2025 to September 2026.</span><span class="ja">TogetherWeTriは、米国国務省の同窓生エンゲージメント・イノベーション基金（AEIF）2025年度の採択団体に選ばれました。事業名は「Shaping a Safer, Stronger, and More Prosperous Future for U.S.-ROK Ties at the American Corners」です。韓国支部が、2025年8月から2026年9月まで事業を実施しました。</span></p>
+        <p class="grant"><span class="en">U.S. Department of State AEIF grant</span><span class="ja">米国国務省 AEIF助成額</span> <b>$58,000</b></p>
+        <h3 style="font-size:1.0625rem;margin-top:6px"><span class="en">Project goals</span><span class="ja">事業の目標</span></h3>
+        <ul class="goals">
+          <li><svg aria-hidden="true"><use href="#bars"/></svg><span><span class="en">Connecting young trilateral leaders</span><span class="ja">若き三国間リーダーをつなぐ</span></span></li>
+          <li><svg aria-hidden="true"><use href="#bars"/></svg><span><span class="en">Strengthening U.S.–ROK–Japan youth networks</span><span class="ja">日米韓の若者ネットワークを強化する</span></span></li>
+          <li><svg aria-hidden="true"><use href="#bars"/></svg><span><span class="en">Building a sustainable trilateral dialogue platform</span><span class="ja">持続可能な三国間対話の場をつくる</span></span></li>
+        </ul>
+      </div>
+      <div class="aeif-media">
+        <img class="cert" src="aeif-certificate.jpg" width="992" height="742" loading="lazy" alt="U.S. Department of State Alumni Engagement Innovation Fund 2025 Awardee certificate for TogetherWeTri">
+        <img src="aeif-award.jpg" width="1000" height="667" loading="lazy" alt="TogetherWeTri members holding the AEIF certificate between U.S. and Korean flags">
+      </div>
+    </div>
+  </section>
+
+  <section class="block tint">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Our impact in action</span><span class="ja">活動の成果</span></span>
+        <h2><span class="en">Let's do it together</span><span class="ja">一緒にやりましょう</span></h2>
+        <p class="slogan" lang="ko">같이 합시다 · 一緒にやりましょう · Let's do it together</p>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <span class="big">6</span>
+          <h3><span class="en">Regional cooperation roundtables</span><span class="ja">地域協力ラウンドテーブル</span></h3>
+          <p><span class="en">Expanding dialogue across cities and sectors in Korea and Japan.</span><span class="ja">韓国と日本で、都市・分野を越えて対話を広げました。</span></p>
+        </div>
+        <div class="stat">
+          <span class="big">500+</span>
+          <h3><span class="en">Youth and university students engaged</span><span class="ja">参加した若者・大学生</span></h3>
+          <p><span class="en">From diverse academic backgrounds.</span><span class="ja">多様な学問分野から参加しました。</span></p>
         </div>
       </div>
     </div>
@@ -632,23 +711,17 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
     </div>
   </section>
 
-  <section class="block tint">
+  <section class="block" style="padding-top:8px">
     <div class="wrap">
-      <div class="block-head">
-        <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Support</span><span class="ja">支援</span></span>
-        <h2><span class="en">Funding and partners</span><span class="ja">資金と連携先</span></h2>
-      </div>
-      <div class="support">
-        <div>
-          <h3><span class="en">Where we started</span><span class="ja">設立の経緯</span></h3>
-          <p><span class="en">TogetherWeTri began in Korea. From August 2025 to September 2026, the Korea Branch carried out a project with seed funding from the U.S. Department of State's Alumni Engagement Innovation Fund (AEIF), which supports projects led by alumni of U.S. government exchange programs.</span><span class="ja">TogetherWeTriは韓国で始まりました。2025年8月から2026年9月まで、韓国支部は、米国政府の交流プログラム修了生が主導するプロジェクトを支援する、米国国務省の同窓生エンゲージメント・イノベーション基金（AEIF）のシード資金を受けてプロジェクトを実施しました。</span></p>
-        </div>
-        <div>
-          <h3><span class="en">Partner with us</span><span class="ja">連携のご相談</span></h3>
+      <div class="cta"><div class="cta-inner">
+        <div style="display:grid;gap:12px;justify-items:start">
+          <span class="eyebrow"><span class="en">Partner with us</span><span class="ja">連携のご相談</span></span>
+          <h2><span class="en">Bring trilateral dialogue to young people in Japan</span><span class="ja">日本の若者に、日米韓の対話を届けませんか</span></h2>
           <p><span class="en">We work with universities, companies, local governments and civil-society groups that want to bring trilateral cooperation to young people in Japan.</span><span class="ja">日本の若者に日米韓協力を届けたいと考える大学、企業、自治体、市民団体との連携を歓迎します。</span></p>
-          <p><a href="#contact" data-nav="contact" data-topic="partnership"><span class="en">Get in touch →</span><span class="ja">お問い合わせ →</span></a></p>
+          <a class="btn light" href="#contact" data-nav="contact" data-topic="partnership" style="margin-top:6px"><span class="en">Get in touch</span><span class="ja">お問い合わせ</span></a>
         </div>
-      </div>
+        <div class="tigers" aria-hidden="true"><img src="hanul.png" alt=""><img src="hank.png" alt=""><img src="haru.png" alt=""></div>
+      </div></div>
     </div>
   </section>
 </div>
@@ -836,6 +909,7 @@ footer .wrap { padding-block: 44px 36px; display: grid; gap: 26px; }
         <a href="#events" data-nav="events"><span class="en">Events</span><span class="ja">イベント</span></a>
         <a href="#news" data-nav="news"><span class="en">News &amp; Newsletter</span><span class="ja">ニュース</span></a>
         <a href="#contact" data-nav="contact"><span class="en">Contact</span><span class="ja">お問い合わせ</span></a>
+        <a class="foot-ext" href="https://togetherwetri-japan.github.io/togetherwetri/" data-global-link><span class="en">TogetherWeTri Global ↗</span><span class="ja">TogetherWeTri 全体サイト ↗</span></a>
       </nav>
     </div>
     <div class="disclaimer">
