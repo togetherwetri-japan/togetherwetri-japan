@@ -49,15 +49,23 @@ const EVENTS = [
   { date: "2026-10-10", time: "14:00–17:00 JST", sample: false,
     title: { en: "Japan-U.S.-ROK Youth Dialogue: Innovation & Resilience", ja: "日米韓の次世代がつくるイノベーションとレジリエンス" },
     place: { en: "Sendai (INTILAQ Tohoku Innovation Center)", ja: "仙台（INTILAQ 東北イノベーションセンター）" }, format: "inperson / online", langs: "EN / JA",
-    desc: { en: "This event brings together young people from Japan, the United States, and the Republic of Korea in Sendai to explore new forms of cooperation across national and cultural boundaries. Featuring experts and emerging leaders from the three countries, the event focuses on innovation, resilience, and regional revitalization across various fields. It provides an opportunity for participants to engage in dialogue and collectively envision new ways for the next generation to advance trilateral cooperation.", ja: "本イベントは、日本・米国・韓国の若者が仙台に集結し、国や立場の違いを越えて「協力」の新しいかたちを語り合う対話イベントです。様々な分野におけるイノベーション（革新）やレジリエンス（回復力）、地方創生をテーマに、日米韓の有識者や若手リーダーをお招きし、次世代の「協力」のあり方を参加者の皆さまと共に考える機会となっております。" }, photo: "poster-sendai1010.jpg"},
+    desc: { en: "This event brings together young people from Japan, the United States, and the Republic of Korea in Sendai to explore new forms of cooperation across national and cultural boundaries. Featuring experts and emerging leaders from the three countries, the event focuses on innovation, resilience, and regional revitalization across various fields. It provides an opportunity for participants to engage in dialogue and collectively envision new ways for the next generation to advance trilateral cooperation.", ja: "本イベントは、日本・米国・韓国の若者が仙台に集結し、国や立場の違いを越えて「協力」の新しいかたちを語り合う対話イベントです。様々な分野におけるイノベーション（革新）やレジリエンス（回復力）、地方創生をテーマに、日米韓の有識者や若手リーダーをお招きし、次世代の「協力」のあり方を参加者の皆さまと共に考える機会となっております。" }
+   , photo: "poster-sendai1010.jpg", report: "report-sendai1010.pdf"},
+   { date: "2026-06-13", time: "10:00 – 14:00 JST", sample: false,
+    title: { en: "Trilateral Sports Diplomacy Dialogue in Tokyo – From Olympic Legacy to Sports Diplomacy"},
+    place: { en: "Hosei University Ichigaya Campus, Fujimi Gate G401"}, format: "inperson", langs: "EN",
+    desc: { en: "Building on TogetherWeTri’s trilateral youth network and JASC’s student-led U.S.-Japan exchange legacy since 1934, this forum will expand people-to-people dialogue into a practical U.S.–ROK–Japan framework. The program will explore how next-generation leaders and experienced professionals can work together to strengthen public diplomacy, regional cooperation, and a secure and prosperous Indo-Pacific.", ja: "TogetherWeTriが築いてきた日米韓の若者ネットワークと、1934年以来、学生主体の日米交流を続けてきたJASCの伝統を基盤に、本フォーラムでは、人と人との対話を日米韓三か国の実践的な協力の枠組みへと発展させます。" }
+   , photo: "poster-tokyo0613.jpg", report: "report-tokyo0613.pdf"},
   { date: "2026-03-08", time: "11:00 – 13:00 JST", sample: false,
     title: { en: "Trilateral Sports Diplomacy Dialogue in Tokyo – From Olympic Legacy to Sports Diplomacy"},
     place: { en: "Lakeland University Japan Conference Room (Muskie Hall)"}, format: "inperson", langs: "EN",
-    desc: { en: "This session will explore how sports, Olympic legacy, and urban engagement can contribute to public diplomacy and future trilateral collaboration", ja: "本セッションでは、スポーツを通じた人と人とのつながりが、次世代の国際協力や公共外交にどのような可能性をもたらすのかをテーマに、専門家やリーダーとともに議論を行います。" }, photo: "poster-tokyo0308.jpg"},
+    desc: { en: "This session will explore how sports, Olympic legacy, and urban engagement can contribute to public diplomacy and future trilateral collaboration", ja: "本セッションでは、スポーツを通じた人と人とのつながりが、次世代の国際協力や公共外交にどのような可能性をもたらすのかをテーマに、専門家やリーダーとともに議論を行います。" }
+   , photo: "poster-tokyo0308.jpg", report: "report-tokyo0308.pdf"},
   { date: "2026-03-06", time: "14:00–17:00 JST", sample: false,
     title: { en: "YTL U.S.-ROK-Japan Cooperation Dialogue in Tokyo"},
     place: { en: "Lakeland University Japan Conference Room (Muskie Hall) "}, format: "inperson", langs: "EN",
-    desc: { en: "This session will explore how strengthening Japan–ROK partnership can further advance U.S.–ROK–Japan collaboration in support of Indo-Pacific stability. Featuring speakers and panelists from diverse academic and professional backgrounds, the dialogue aims to foster thoughtful discussion, cross-border connections, and practical perspectives on youth-driven cooperation.", ja: "本セッションでは、日韓パートナーシップの強化を通じて、インド太平洋地域の安定に向けた日米韓協力をどのように発展させていけるかをテーマに、多様な分野で活躍するスピーカーやパネリストとともに議論を行います。" }, photo: "poster-tokyo0306.jpg"}
+    desc: { en: "This session will explore how strengthening Japan–ROK partnership can further advance U.S.–ROK–Japan collaboration in support of Indo-Pacific stability. Featuring speakers and panelists from diverse academic and professional backgrounds, the dialogue aims to foster thoughtful discussion, cross-border connections, and practical perspectives on youth-driven cooperation.", ja: "本セッションでは、日韓パートナーシップの強化を通じて、インド太平洋地域の安定に向けた日米韓協力をどのように発展させていけるかをテーマに、多様な分野で活躍するスピーカーやパネリストとともに議論を行います。" }
+   , photo: "poster-tokyo0306.jpg", report: "report-tokyo0308.pdf"}
 ];
 
 const POST_CATS = {
