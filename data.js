@@ -31,7 +31,16 @@ const SITE = {
   formEndpoint: "",
 
   // ニュースレター登録用のURL（Googleフォームなど）。空欄ならメールでの申し込み案内を表示します。
-  newsletterSignupUrl: ""
+  newsletterSignupUrl: "",
+
+  // SNS のリンク。url を入れたものだけが、フッターとお問い合わせページに表示されます。
+  // 使わないものは url を "" のままにするか、行ごと消してください。並び順もそのまま表示順になります。
+  social: [
+    { name: "LinkedIn",  url: "https://www.linkedin.com/company/togetherwetri-ytl/" },
+    { name: "Instagram", url: "https://www.instagram.com/togetherwetri_japan/" },
+    { name: "X",         url: "" },
+    { name: "Facebook",  url: "" }
+  ]
 };
 
 const MEMBERS = [

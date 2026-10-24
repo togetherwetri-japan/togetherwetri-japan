@@ -1,4 +1,16 @@
 /* TogetherWeTri Japan — site logic. 通常は編集不要です（内容の更新は data.js で行います）。 */
+
+/* If data.js has a typo, show where instead of a half-broken page */
+if (window.__dataError || typeof SITE === "undefined" || typeof EVENTS === "undefined" || typeof MEMBERS === "undefined" || typeof POSTS === "undefined") {
+  const err = window.__dataError;
+  const bar = document.createElement("div");
+  bar.className = "data-error"; bar.setAttribute("role", "alert");
+  bar.innerHTML = "<b>data.js の書き方に誤りがあり、内容を表示できません。</b>" +
+    (err && err.line ? ` ${err.line}行目付近を確認してください。` : "") +
+    " カンマ（,）の抜けや重複、\" の閉じ忘れがよくある原因です。GitHubの History から直前の版に戻すこともできます。";
+  document.body.prepend(bar);
+  throw new Error("data.js could not be loaded" + (err ? ` (line ${err.line}: ${err.msg})` : ""));
+}
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 let LANG = "en";
@@ -96,7 +108,8 @@ function renderEvents() {
     : emptyHTML(evFilter === "upcoming" ? L("No upcoming events yet. Check back soon or subscribe to the newsletter.", "現在予定されているイベントはありません。ニュースレターで最新情報をお届けします。") : L("No past events yet.", "過去のイベントはまだありません。"));
   $("#ev-count").textContent = LANG === "ja" ? `${list.length}件` : `${list.length} ${list.length === 1 ? "event" : "events"}`;
   $$(".tabs [data-ev]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.ev === evFilter)));
-  $("#home-events").innerHTML = up.length ? up.slice(0, 2).map(eventHTML).join("") : emptyHTML(L("No upcoming events yet.", "現在予定されているイベントはありません。"));
+  $("#home-events").innerHTML = up.length ? up.slice(0, 2).map(eventHTML).join("")
+    : emptyHTML(L("No upcoming events yet. Here are our most recent ones.", "現在予定されているイベントはありません。最近のイベントをご覧ください。")) + past.slice(0, 2).map(eventHTML).join("");
 }
 
 function postHTML(p, i) {
@@ -150,12 +163,18 @@ function renderSubscribe() {
   }
 }
 
+function renderSocial() {
+  const list = (SITE.social || []).filter((x) => x && x.url);
+  $$("[data-social]").forEach((el) => { el.innerHTML = list.map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name || x.url)} ↗</a>`).join(""); });
+  $$("[data-social-wrap]").forEach((w) => { w.hidden = !list.length; });
+}
+
 function setSubmitLabel() {
   $("#c-submit").textContent = SITE.formEndpoint ? L("Send message", "送信する") : L("Prepare my message", "メッセージを作成");
 }
 
 function renderAll() {
-  renderEvents(); renderPosts(); renderMembers(); renderTopics(); renderSubscribe(); setSubmitLabel();
+  renderEvents(); renderPosts(); renderMembers(); renderTopics(); renderSubscribe(); setSubmitLabel(); renderSocial();
   $("#email-addr").textContent = SITE.email;
   $("#c-msg").placeholder = L("How can we help?", "ご用件をご記入ください。");
 }

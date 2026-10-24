@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Caveat+Brush&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Caveat+Brush&family=Source+Sans+3:wght@700;800&display=swap">
 <style>
 html, body { margin: 0; }
 img { max-width: 100%; }
@@ -78,8 +78,11 @@ html[data-lang="ja"] .eyebrow { letter-spacing: .08em; }
 .site-header .wrap { display: flex; align-items: center; gap: 14px; min-height: 66px; position: relative; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; color: var(--ink); }
 .brand img { height: 30px; width: auto; }
-.brand-txt { font-family: var(--f-display); font-weight: 800; font-size: .9375rem; line-height: 1.05; letter-spacing: .04em; }
-.brand-txt small { display: block; font-weight: 700; font-size: .625rem; letter-spacing: .32em; color: var(--muted); margin-top: 3px; }
+/* Logo text: Source Sans 3 is closest to the logo lettering and its J sits on the baseline.
+   JAPAN uses the same size, weight and letter-spacing as the first line. */
+.brand-txt { display: inline-grid; gap: 3px; font-family: "Source Sans 3", "Open Sans", system-ui, sans-serif; font-weight: 800; font-size: 1rem; line-height: 1; letter-spacing: .06em; }
+.brand-txt .bt-top { white-space: nowrap; }
+.brand-txt .bt-sub { white-space: nowrap; color: var(--blue); }
 .nav { display: flex; gap: 2px; align-items: center; }
 .nav a { color: var(--ink); text-decoration: none; font-size: var(--s-sm); font-weight: 500; padding: 8px 12px; border-radius: 999px; white-space: nowrap; }
 .nav a:hover { background: var(--sky-soft); }
@@ -400,6 +403,16 @@ dialog.poster-view { width: min(920px, calc(100vw - 32px)); }
 .sec-menu button:hover, .sec-menu button:focus-visible { background: var(--sky-soft); outline: none; }
 .hero h1 .swoosh { white-space: nowrap; }
 html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; font-size: .875rem; letter-spacing: .04em; line-height: 1.4; }
+/* Shown only if data.js has a typo */
+.data-error { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: #B4232A; color: #fff; padding: 14px max(16px, env(safe-area-inset-right, 0px)) 14px max(16px, env(safe-area-inset-left, 0px)); font-size: var(--s-sm); line-height: 1.6; }
+.data-error b { font-weight: 700; }
+/* SNS links (filled from SITE.social in data.js; hidden while empty) */
+.social { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.social-label { font-family: var(--f-display); font-weight: 700; font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--navy); }
+html[data-lang="ja"] .social-label { letter-spacing: .06em; }
+.social-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.social-links a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--navy); font-weight: 700; font-size: var(--s-sm); line-height: 1.2; text-decoration: none; }
+.social-links a:hover { border-color: var(--blue); color: var(--blue); }
 </style>
 </head>
 <body>
@@ -418,7 +431,7 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
   <div class="wrap">
     <a class="brand" href="#home" data-nav="home" aria-label="TogetherWeTri Japan home">
       <img src="mark.png" alt="" width="72" height="30">
-      <span class="brand-txt">TOGETHER WETRI<small>JAPAN</small></span>
+      <span class="brand-txt"><span class="bt-top">TOGETHER WE TRI</span><span class="bt-sub">JAPAN</span></span>
     </a>
     <nav class="nav" id="site-nav" aria-label="Main">
       <a href="#home" data-nav="home"><span class="en">Home</span><span class="ja">ホーム</span></a>
@@ -868,6 +881,10 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
           <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Email</span><span class="ja">メール</span></span>
           <div class="copybox"><span class="addr" id="email-addr"></span><button type="button" class="copy-btn" data-copy="email"><span class="en">Copy</span><span class="ja">コピー</span></button></div>
         </div>
+        <div style="display:grid;gap:10px" data-social-wrap hidden>
+          <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Social media</span><span class="ja">SNS</span></span>
+          <div class="social-links" data-social></div>
+        </div>
         <div style="display:grid;gap:12px">
           <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Ways to get involved</span><span class="ja">参加の方法</span></span>
           <div>
@@ -936,12 +953,22 @@ html[data-lang="ja"] .value .n { font-family: var(--f-body); font-weight: 700; f
         <a class="foot-ext" href="https://togetherwetri-japan.github.io/togetherwetri/" data-global-link><span class="en">TogetherWeTri Global ↗</span><span class="ja">TogetherWeTri 全体サイト ↗</span></a>
       </nav>
     </div>
+    <div class="social" data-social-wrap hidden>
+      <span class="social-label"><span class="en">Follow us</span><span class="ja">SNSでフォロー</span></span>
+      <div class="social-links" data-social></div>
+    </div>
     <div class="disclaimer">
       <p class="num">© <span id="yr">2026</span> TogetherWeTri Japan</p>
     </div>
   </div>
 </footer>
 
+<script>
+  // Remember where data.js breaks so the page can point to the line
+  window.addEventListener("error", function (e) {
+    if (e.filename && /data\.js/.test(e.filename)) window.__dataError = { line: e.lineno, msg: e.message };
+  });
+</script>
 <script src="data.js"></script>
 <script src="app.js"></script>
 </body>
