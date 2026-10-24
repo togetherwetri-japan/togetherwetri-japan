@@ -50,12 +50,19 @@ const EVENTS = [
     title: { en: "Japan-U.S.-ROK Youth Dialogue: Innovation & Resilience", ja: "日米韓の次世代がつくるイノベーションとレジリエンス" },
     place: { en: "Sendai (INTILAQ Tohoku Innovation Center)", ja: "仙台（INTILAQ 東北イノベーションセンター）" }, format: "inperson / online", langs: "EN / JA",
     desc: { en: "This event brings together young people from Japan, the United States, and the Republic of Korea in Sendai to explore new forms of cooperation across national and cultural boundaries. Featuring experts and emerging leaders from the three countries, the event focuses on innovation, resilience, and regional revitalization across various fields. It provides an opportunity for participants to engage in dialogue and collectively envision new ways for the next generation to advance trilateral cooperation.", ja: "本イベントは、日本・米国・韓国の若者が仙台に集結し、国や立場の違いを越えて「協力」の新しいかたちを語り合う対話イベントです。様々な分野におけるイノベーション（革新）やレジリエンス（回復力）、地方創生をテーマに、日米韓の有識者や若手リーダーをお招きし、次世代の「協力」のあり方を参加者の皆さまと共に考える機会となっております。" }
-   , photo: "poster-sendai1010.jpg", report: "report-sendai1010.pdf"},
+   , organizer:{en:"INTILAQ Tohoku Innovation Center, zero to one, Inc.", ja: "INTILAQ東北イノベーションセンター, 株式会社 zero to one" }, support: {en:"Sendai City, United States Embassy, Consulate General of the Republic of Korea in Sendai", ja: "仙台市、在日米国大使館、駐仙台大韓民国総領事館"},
+,  photo: "poster-sendai1010.jpg", report: "report-sendai1010.pdf"},
    { date: "2026-06-13", time: "10:00 – 14:00 JST", sample: false,
     title: { en: "Trilateral Sports Diplomacy Dialogue in Tokyo – From Olympic Legacy to Sports Diplomacy"},
     place: { en: "Hosei University Ichigaya Campus, Fujimi Gate G401"}, format: "inperson", langs: "EN",
     desc: { en: "Building on TogetherWeTri’s trilateral youth network and JASC’s student-led U.S.-Japan exchange legacy since 1934, this forum will expand people-to-people dialogue into a practical U.S.–ROK–Japan framework. The program will explore how next-generation leaders and experienced professionals can work together to strengthen public diplomacy, regional cooperation, and a secure and prosperous Indo-Pacific.", ja: "TogetherWeTriが築いてきた日米韓の若者ネットワークと、1934年以来、学生主体の日米交流を続けてきたJASCの伝統を基盤に、本フォーラムでは、人と人との対話を日米韓三か国の実践的な協力の枠組みへと発展させます。" }
    , photo: "poster-tokyo0613.jpg", report: "report-tokyo0613.pdf"},
+    { date: "2026-06-12 ~ 2026-06-13", sample: false,
+    title: { en: "Now It is your Turn"}, format: "inperson", langs: "EN",
+    desc: { en: "A youth-led U.S.–ROK–Japan initiative building on the 2026 YTL Alumni Workshop in Honolulu to co-create practical counter-speech and media literacy learning tools for high school classrooms. Bringing together YTL and Trilateral Teacher Training (TTT) alumni, the project connects freedom of speech, responsible communication, and journalism with classroom practice and community-based learning.",
+           ja: "2026年のホノルルYTL同窓生ワークショップを発展させ、日米韓の若者が協働し、高校で活用できるカウンタースピーチとメディアリテラシーの教材を共創する取り組みです。YTL・日韓合同英語教員養成プログラム(TTT)修了生が連携し、表現の自由や責任あるコミュニケーション、ジャーナリズムへの理解を、授業や地域社会での実践につなげます。" }
+   ,support: {en:"U.S. Embassy Seoul, U.S. Embassy Tokyo, Korea Japan English Camp (KJEC), the East-West Center, the Future of Free Speech", ja: "在韓米国大使館, 在日米国大使館, Korea Japan English Camp (KJEC), the East-West Center, the Future of Free Speech"},
+     photo: "poster-tokyo0612.jpg", report: "report-tokyo0612.pdf"},
   { date: "2026-03-08", time: "11:00 – 13:00 JST", sample: false,
     title: { en: "Trilateral Sports Diplomacy Dialogue in Tokyo – From Olympic Legacy to Sports Diplomacy"},
     place: { en: "Lakeland University Japan Conference Room (Muskie Hall)"}, format: "inperson", langs: "EN",
