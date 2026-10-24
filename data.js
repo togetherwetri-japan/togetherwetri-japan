@@ -68,10 +68,11 @@ const EVENTS = [
     desc: { en: "This event brings together young people from Japan, the United States, and the Republic of Korea in Sendai to explore new forms of cooperation across national and cultural boundaries. Featuring experts and emerging leaders from the three countries, the event focuses on innovation, resilience, and regional revitalization across various fields. It provides an opportunity for participants to engage in dialogue and collectively envision new ways for the next generation to advance trilateral cooperation.", ja: "本イベントは、日本・米国・韓国の若者が仙台に集結し、国や立場の違いを越えて「協力」の新しいかたちを語り合う対話イベントです。様々な分野におけるイノベーション（革新）やレジリエンス（回復力）、地方創生をテーマに、日米韓の有識者や若手リーダーをお招きし、次世代の「協力」のあり方を参加者の皆さまと共に考える機会となっております。" }
    , organizer:{en:"INTILAQ Tohoku Innovation Center, zero to one, Inc.", ja: "INTILAQ東北イノベーションセンター, 株式会社 zero to one" }, support: {en:"Sendai City, United States Embassy, Consulate General of the Republic of Korea in Sendai", ja: "仙台市、在日米国大使館、駐仙台大韓民国総領事館"},
   participants: { en: "40 participants (24 on site, 16 online)", ja: "参加者40名（会場24名・オンライン16名）" },
-    schedule: [
+     lead: { en: "Sora Yamasaki (TogetherWeTri Japan Branch)", ja: "山﨑蒼空（TogetherWeTri 日本支部）" }, 
+   schedule: [
       { time: "14:00–14:20", en: "Opening and Congratulatory Remarks", ja: "開会・ご挨拶" },
-      { time: "14:20–15:30", en: "Part I — Keynote Addresses (Claire Park; Takashi Takekawa)", ja: "第1部 基調講演（Claire Park氏、Takashi Takekawa氏）" },
-      { time: "15:40–16:20", en: "Part II — Panel Discussion: Beyond Borders — People, Innovation, and Resilience", ja: "第2部 パネルディスカッション「Beyond Borders — 人・イノベーション・レジリエンス」" },
+      { time: "14:20–15:30", en: "Part I — Keynote Addresses (Claire Park; Takashi Takekawa)", ja: "第1部 基調講演（Claire Park氏、竹川隆司氏）" },
+      { time: "15:40–16:20", en: "Part II — Panel Discussion: Beyond Borders — People, Innovation, and Resilience  (Robert Everman, Shosuke Hasegawa, Taichi Deguchi, Miku Narisawa)", ja: "第2部 パネルディスカッション「Beyond Borders — 人・イノベーション・レジリエンス」（Robert Everman氏, 長谷川翔亮氏, 出口敦智氏, 成澤みく氏)" },
       { time: "16:25–16:55", en: "Part III — Group Discussion: From Here to the World — Turning Ideas into Action", ja: "第3部 グループディスカッション「ここから世界へ — アイデアを行動に」" },
       { time: "16:55–17:00", en: "Closing", ja: "閉会" }
     ],
@@ -79,7 +80,7 @@ const EVENTS = [
       { src: "sendai1010-1.jpg", en: "TogetherWeTri members with speakers and panelists", ja: "登壇者・パネリストとTogetherWeTriメンバー" },
       { src: "sendai1010-2.jpg", en: "Opening remarks (Masahiro Yamaguchi, Executive Vice President, Tohoku University)", ja: "開会のご挨拶（東北大学 理事・副学長 山口昌弘氏）" },
       { src: "sendai1010-3.jpg", en: "Keynote I (Claire Park)", ja: "基調講演I（Claire Park氏）" },
-      { src: "sendai1010-4.jpg", en: "Keynote II (Takashi Takekawa)", ja: "基調講演II（Takashi Takekawa氏）" },
+      { src: "sendai1010-4.jpg", en: "Keynote II (Takashi Takekawa)", ja: "基調講演II（竹川隆司氏）" },
       { src: "sendai1010-5.jpg", en: "Panel discussion", ja: "パネルディスカッション" },
       { src: "sendai1010-6.jpg", en: "Group discussion", ja: "グループディスカッション" }
     ],
