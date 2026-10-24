@@ -389,6 +389,7 @@ dialog.poster-view { width: min(920px, calc(100vw - 32px)); }
 .pv-inner { padding: 18px 18px 22px; display: grid; gap: 12px; }
 .pv-inner img { width: auto; max-width: 100%; max-height: calc(100vh - 190px); margin-inline: auto; border-radius: 10px; }
 .pv-foot { display: flex; justify-content: center; }
+#pv-title { text-transform: none; letter-spacing: .02em; }
 /* About: section jump menu opened from the three-bar mark */
 #page-about section[id] { scroll-margin-top: 88px; }
 .sec-toggle { appearance: none; display: inline-flex; align-items: center; gap: 5px; padding: 4px 7px; margin: -4px 0; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--blue); cursor: pointer; }
@@ -413,6 +414,41 @@ html[data-lang="ja"] .social-label { letter-spacing: .06em; }
 .social-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .social-links a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--navy); font-weight: 700; font-size: var(--s-sm); line-height: 1.2; text-decoration: none; }
 .social-links a:hover { border-color: var(--blue); color: var(--blue); }
+/* Event title opens the details */
+.ev-title { appearance: none; border: 0; background: none; padding: 0; margin: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: text-decoration-color .15s ease, color .15s ease; }
+.ev-title:hover { color: var(--blue); text-decoration-color: currentColor; }
+/* Event details dialog */
+dialog.ev-detail { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh - 32px); }
+.ed-inner { padding: 20px clamp(18px, 4vw, 40px) 36px; display: grid; gap: 14px; border-top: 6px solid var(--red); }
+.ed-inner .reader-top { position: sticky; top: 0; z-index: 2; background: var(--paper); margin: -20px calc(-1 * clamp(18px, 4vw, 40px)) 0; padding: 14px clamp(18px, 4vw, 40px) 10px; justify-content: flex-end; }
+#ed-body { display: grid; gap: 14px; }
+#ed-body h2 { font-size: clamp(1.4rem, 3.2vw, 1.9rem); }
+.ed-cols { display: grid; grid-template-columns: 1fr 200px; gap: 28px; align-items: start; }
+.ed-cols.no-poster { grid-template-columns: 1fr; }
+.ed-cols > * { min-width: 0; }
+.ed-main { display: grid; gap: 12px; }
+.ed-desc { color: var(--ink); font-size: var(--s-sm); max-width: 70ch; }
+.ed-participants { display: inline-flex; justify-self: start; padding: 6px 12px; border-radius: 12px; background: #FBECEC; color: var(--red); font-weight: 700; font-size: var(--s-sm); }
+.ed-sec { display: grid; gap: 12px; padding-top: 18px; border-top: 1px solid var(--line); }
+.ed-sec h3 { font-size: 1.0625rem; }
+.ed-sched { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.ed-sched li { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: var(--s-sm); }
+.ed-sched li.ed-day { display: block; padding: 14px 0 6px; border-bottom: 0; font-weight: 700; color: var(--navy); }
+.ed-time { color: var(--red); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ed-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.ed-gallery figure { margin: 0; display: grid; gap: 6px; min-width: 0; }
+.ed-gallery button { appearance: none; border: 0; padding: 0; background: none; cursor: zoom-in; border-radius: 10px; overflow: hidden; }
+.ed-gallery img { width: 100%; aspect-ratio: 3 / 2; height: auto; object-fit: cover; transition: transform .2s ease; }
+.ed-gallery button:hover img { transform: scale(1.03); }
+.ed-gallery figcaption { font-size: var(--s-xs); color: var(--muted); line-height: 1.5; }
+.ed-video { position: relative; width: 100%; max-width: 760px; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; }
+.ed-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+@media (max-width: 720px) { .ed-cols { grid-template-columns: 1fr; } .ed-cols .ev-poster { grid-column: 1; max-width: 220px; justify-self: start; } .ed-gallery { grid-template-columns: 1fr 1fr; } .ed-sched li { grid-template-columns: 1fr; gap: 2px; } }
+/* About: photo grid beside the background text */
+.about-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.about-photos figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; background: var(--sky-soft); }
+.about-photos img { width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; }
+.about-photos figcaption { position: absolute; left: 8px; bottom: 8px; padding: 3px 9px; border-radius: 999px; background: rgba(20,47,76,.78); color: #fff; font-size: .75rem; font-weight: 700; letter-spacing: .02em; }
 </style>
 </head>
 <body>
@@ -646,7 +682,12 @@ html[data-lang="ja"] .social-label { letter-spacing: .06em; }
           <span class="eyebrow"><button type="button" class="sec-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="sec-menu" aria-label="Jump to a section / 項目へ移動" title="Jump to a section / 項目へ移動"><svg aria-hidden="true"><use href="#bars"/></svg></button><span class="en">Background</span><span class="ja">設立の背景</span></span>
           <h2><span class="en">Closing the gap between summits and society</span><span class="ja">首脳会談と社会の間のギャップを埋める</span></h2>
         </div>
-        <div class="about-logo"><img src="logo.png" width="547" height="638" alt="TogetherWeTri Japan logo"></div>
+        <div class="about-photos">
+          <figure><img src="tokyo0306-1.jpg" width="1309" height="637" loading="lazy" alt="Participants of the YTL U.S.-ROK-Japan Cooperation Dialogue in Tokyo"><figcaption><span class="en">Tokyo · Mar 2026</span><span class="ja">東京・2026年3月</span></figcaption></figure>
+          <figure><img src="tokyo0613-1.jpg" width="1400" height="934" loading="lazy" alt="Participants and speakers at the U.S.-ROK-Japan Professional x Youth Dialogue"><figcaption><span class="en">Tokyo · Jun 2026</span><span class="ja">東京・2026年6月</span></figcaption></figure>
+          <figure><img src="tokyo0612-1.jpg" width="1400" height="934" loading="lazy" alt="Participants holding the #Now It Is Your Turn banner"><figcaption><span class="en">Tokyo · Jun 2026</span><span class="ja">東京・2026年6月</span></figcaption></figure>
+          <figure><img src="sendai1010-1.jpg" width="1400" height="837" loading="lazy" alt="Speakers, panelists and TogetherWeTri members in Sendai"><figcaption><span class="en">Sendai · Oct 2026</span><span class="ja">仙台・2026年10月</span></figcaption></figure>
+        </div>
       </div>
       <div class="prose">
         <p>
@@ -926,6 +967,12 @@ html[data-lang="ja"] .social-label { letter-spacing: .06em; }
     </div>
     <img id="pv-img" src="" alt="">
     <div class="pv-foot"><a class="btn ghost" id="pv-open" href="#" target="_blank" rel="noopener"><span class="en">Open full size ↗</span><span class="ja">原寸で開く ↗</span></a></div>
+  </div>
+</dialog>
+<dialog class="reader ev-detail" id="ev-detail" aria-labelledby="ed-title">
+  <div class="ed-inner">
+    <div class="reader-top"><button type="button" class="close-btn" id="ed-close"><span class="en">Close</span><span class="ja">閉じる</span></button></div>
+    <div id="ed-body"></div>
   </div>
 </dialog>
 <div class="sec-menu" id="sec-menu" role="menu" hidden>

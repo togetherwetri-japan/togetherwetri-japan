@@ -39,7 +39,8 @@ const CREDIT_KEYS = [
   ["cohost", "Co-hosted by", "共催"],
   ["support", "Supported by", "後援"],
   ["sponsor", "Sponsored by", "協賛"],
-  ["partners", "In collaboration with", "協力"]
+  ["partners", "In collaboration with", "協力"],
+  ["lead", "Program lead", "企画担当"]
 ];
 function creditText(v) {
   if (!v) return "";
@@ -74,7 +75,7 @@ function eventHTML(e) {
   const poster = e.poster || e.photo || "";
   const report = e.report || "";
   const isPdf = /\.pdf($|[?#])/i.test(report);
-  const actions = [];
+  const actions = [`<button type="button" class="btn ghost" data-detail="${i}">${L("Details", "詳細を見る")}${(e.gallery || []).length ? ` · ${L("Photos", "写真")} ${(e.gallery || []).length}` : ""}</button>`];
   if (!past) actions.push(`<a class="btn" href="#contact" data-nav="contact" data-topic="event" data-event="${esc(t(e.title))}">${L("Register", "申し込む")}</a>`);
   if (report) actions.push(`<a class="btn ${past ? "" : "ghost"}" href="${esc(report)}" target="_blank" rel="noopener">${DOC_ICON}${L("Event report", "イベントレポート")}${isPdf ? " (PDF)" : ""}</a>`);
   return `<article class="event${past ? " is-past" : ""}${poster ? " has-poster" : ""}">
@@ -89,7 +90,7 @@ function eventHTML(e) {
         ${past ? `<span class="chip past">${L("Past", "終了")}</span>` : ""}
         ${e.sample ? `<span class="chip sample">${L("Sample", "サンプル")}</span>` : ""}
       </div>
-      <h3>${esc(t(e.title))}</h3>
+      <h3><button type="button" class="ev-title" data-detail="${i}">${esc(t(e.title))}</button></h3>
       <div class="ev-meta"><span>${fmtRange(e)}${e.time ? " · " + esc(e.time) : ""}</span><span>${esc(t(e.place))}</span></div>
       <p>${esc(t(e.desc))}</p>
       ${creditsHTML(e)}
@@ -239,9 +240,12 @@ document.addEventListener("click", (ev) => {
   if (jump) { closeSecMenu(); const el = document.getElementById(jump.dataset.jump); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
   if (secToggle && !ev.target.closest("#sec-menu")) closeSecMenu();
   const pv = ev.target.closest("[data-poster]"); if (pv) { openPoster(Number(pv.dataset.poster)); return; }
+  const ph = ev.target.closest("[data-photo]"); if (ph) { const [i, k] = ph.dataset.photo.split(":").map(Number); openPhoto(i, k); return; }
+  const dt = ev.target.closest("[data-detail]"); if (dt) { openDetail(Number(dt.dataset.detail)); return; }
   const nav = ev.target.closest("[data-nav]");
   if (nav) {
     ev.preventDefault();
+    if ($("#ev-detail").open) closeDetail();
     go(nav.dataset.nav);
     if (nav.dataset.topic) {
       $("#sent").hidden = true;
@@ -257,6 +261,91 @@ document.addEventListener("click", (ev) => {
   const pb = ev.target.closest("[data-post]"); if (pb) { openPost(Number(pb.dataset.post)); return; }
   const cb = ev.target.closest("[data-copy]"); if (cb) { copyText(SITE.email, cb); return; }
 });
+
+/* ---------- Event details (schedule, photos, video) ---------- */
+const galleryItem = (g) => (typeof g === "string" ? { src: g } : (g || {}));
+function youtubeId(url) {
+  const m = String(url || "").match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/))([\w-]{11})/);
+  return m ? m[1] : "";
+}
+function scheduleHTML(e) {
+  const rows = (e.schedule || []).map((r) => {
+    if (r.day) return `<li class="ed-day">${esc(t(r.day))}</li>`;
+    const label = r.en || r.ja ? t({ en: r.en || r.ja, ja: r.ja || r.en }) : t(r.title);
+    return `<li><span class="ed-time">${esc(r.time || "")}</span><span>${esc(label)}</span></li>`;
+  }).join("");
+  return rows ? `<section class="ed-sec"><h3>${L("Schedule", "スケジュール")}</h3><ol class="ed-sched">${rows}</ol></section>` : "";
+}
+function videosHTML(e) {
+  const list = [].concat(e.video || []).filter(Boolean);
+  if (!list.length) return "";
+  const items = list.map((v) => {
+    const url = typeof v === "string" ? v : v.url;
+    const id = youtubeId(url);
+    return id ? `<div class="ed-video"><iframe src="https://www.youtube-nocookie.com/embed/${id}" title="${esc(t(e.title))}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`
+      : `<p><a class="btn ghost" href="${esc(url)}" target="_blank" rel="noopener">${L("Watch the video ↗", "動画を見る ↗")}</a></p>`;
+  }).join("");
+  return `<section class="ed-sec"><h3>${L("Video", "動画")}</h3>${items}</section>`;
+}
+function galleryHTML(e, i) {
+  const g = (e.gallery || []).map(galleryItem).filter((x) => x.src);
+  if (!g.length) return "";
+  return `<section class="ed-sec"><h3>${L("Photos", "当日の写真")}</h3><div class="ed-gallery">${g.map((x, k) => {
+    const cap = x.en || x.ja ? t({ en: x.en || x.ja, ja: x.ja || x.en }) : "";
+    return `<figure><button type="button" data-photo="${i}:${k}"><img src="${esc(x.src)}" alt="${esc(cap || t(e.title))}" loading="lazy"></button>${cap ? `<figcaption>${esc(cap)}</figcaption>` : ""}</figure>`;
+  }).join("")}</div></section>`;
+}
+function openDetail(i) {
+  const e = EVENTS[i]; if (!e) return;
+  const past = evEnd(e) < TODAY;
+  const poster = e.poster || e.photo || "";
+  const report = e.report || "";
+  const actions = [];
+  if (!past) actions.push(`<a class="btn" href="#contact" data-nav="contact" data-topic="event" data-event="${esc(t(e.title))}">${L("Register", "申し込む")}</a>`);
+  if (report) actions.push(`<a class="btn ${past ? "" : "ghost"}" href="${esc(report)}" target="_blank" rel="noopener">${DOC_ICON}${L("Event report", "イベントレポート")}${/\.pdf($|[?#])/i.test(report) ? " (PDF)" : ""}</a>`);
+  const participants = e.participants ? `<p class="ed-participants">${esc(t(e.participants))}</p>` : "";
+  $("#ed-body").innerHTML = `
+    <div class="chips">
+      <span class="chip">${formatLabel(e.format)}</span>${e.langs ? `<span class="chip">${esc(e.langs)}</span>` : ""}
+      ${past ? `<span class="chip past">${L("Past", "終了")}</span>` : ""}
+    </div>
+    <h2 id="ed-title">${esc(t(e.title))}</h2>
+    <div class="ev-meta"><span>${fmtRange(e)}${e.time ? " · " + esc(e.time) : ""}</span><span>${esc(t(e.place))}</span></div>
+    <div class="ed-cols${poster ? "" : " no-poster"}">
+      <div class="ed-main">
+        ${participants}
+        <p class="ed-desc">${esc(t(e.desc))}</p>
+        ${creditsHTML(e)}
+        ${actions.length ? `<div class="btns">${actions.join("")}</div>` : ""}
+      </div>
+      ${poster ? `<button type="button" class="ev-poster" data-poster="${i}"><img src="${esc(poster)}" alt="${esc(L("Poster: ", "ポスター：") + t(e.title))}"><span>${L("View poster", "ポスターを拡大")}</span></button>` : ""}
+    </div>
+    ${scheduleHTML(e)}
+    ${galleryHTML(e, i)}
+    ${videosHTML(e)}`;
+  const d = $("#ev-detail");
+  if (d.showModal) { if (!d.open) d.showModal(); } else d.setAttribute("open", "");
+  d.scrollTop = 0;
+}
+function closeDetail() {
+  const d = $("#ev-detail");
+  d.close ? d.close() : d.removeAttribute("open");
+}
+$("#ed-close").addEventListener("click", closeDetail);
+$("#ev-detail").addEventListener("click", (e) => { if (e.target === e.currentTarget) closeDetail(); });
+// stop any playing video when the dialog closes
+$("#ev-detail").addEventListener("close", () => { $("#ed-body").innerHTML = ""; });
+
+function openPhoto(i, k) {
+  const e = EVENTS[i]; if (!e) return;
+  const x = galleryItem((e.gallery || [])[k]); if (!x.src) return;
+  const cap = x.en || x.ja ? t({ en: x.en || x.ja, ja: x.ja || x.en }) : t(e.title);
+  $("#pv-title").textContent = cap;
+  $("#pv-img").src = x.src; $("#pv-img").alt = cap;
+  $("#pv-open").href = x.src;
+  const d = $("#poster-view");
+  if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+}
 
 function openPoster(i) {
   const e = EVENTS[i]; if (!e) return;
