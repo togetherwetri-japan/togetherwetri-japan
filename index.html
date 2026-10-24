@@ -123,7 +123,7 @@ html[data-lang="ja"] .hero h1 { font-weight: 900; letter-spacing: 0; max-width: 
 .hero .lede { max-width: 60ch; color: #3E4558; font-size: var(--s-md); }
 .hero .btns { justify-content: center; margin-top: 4px; }
 .hero-art { max-width: 1180px; margin: -8px auto 0; }
-.hero-art img { width: 100%; height: auto;
+.hero-art > img { width: 100%; height: auto;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent), linear-gradient(to bottom, transparent, #000 26%);
   -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent), linear-gradient(to bottom, transparent, #000 26%); mask-composite: intersect; }
 .cities { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 26px; padding-block: 6px 26px; font-family: var(--f-display); font-size: var(--s-xs); font-weight: 700; letter-spacing: .16em; color: var(--muted); }
@@ -448,6 +448,44 @@ dialog.ev-detail { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh
 .about-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .about-photos figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; background: var(--sky-soft); }
 .about-photos img { width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; }
+/* ---- Mascots popping up around the home page ---- */
+html, body { overflow-x: clip; }
+.mz { position: absolute; z-index: 0; display: block; line-height: 0; cursor: default; }
+.mz img { display: block; width: auto; height: 100%; transform-origin: 50% 100%; }
+/* greeting bubble in each tiger's own language */
+.mz::after, .mascot[data-say]::after {
+  content: attr(data-say); position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translate(-50%, 6px) scale(.6); opacity: 0;
+  padding: 5px 11px; border-radius: 999px; background: #fff; color: var(--navy); border: 2px solid var(--navy);
+  font: 700 .9rem/1.2 var(--f-body); white-space: nowrap; box-shadow: 0 6px 14px rgba(20,47,76,.15); pointer-events: none;
+  transition: opacity .18s ease, transform .18s cubic-bezier(.3,1.6,.5,1); }
+.mz:hover::after, .mascot[data-say]:hover::after { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.mascot[data-say] { position: relative; }
+.mascot[data-say]::after { bottom: auto; top: 10px; }
+.values.has-mz, .programs.has-mz { position: relative; }
+.values.has-mz .value, .programs.has-mz .program { position: relative; z-index: 1; }
+.mz-peek { height: 64px; }
+.mz-lounge { height: 74px; }
+.mz-values { top: -68px; right: 24px; }
+.mz-programs { top: -54px; right: 36px; }
+.btn-peek { position: relative; display: inline-block; }
+.btn-peek .btn { position: relative; z-index: 1; }
+.mz-btn { height: 46px; top: -36px; right: 14px; }
+@media (prefers-reduced-motion: no-preference) {
+  .mz img { animation: mz-bob 3.6s ease-in-out infinite; }
+  .mz-values img { animation-delay: -.6s; }
+  .mz-lounge img { animation: mz-breathe 3.4s ease-in-out infinite; }
+  .mz-lounge:hover img { animation: mz-wiggle .5s ease-in-out; }
+  @keyframes mz-breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.02, .97); } }
+  .mz-programs img { animation-delay: -2s; }
+  .mz-peek img { animation-name: mz-peek; }
+  .mz:hover img { animation: mz-wiggle .5s ease-in-out; }
+  @keyframes mz-bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(-2deg); } }
+  @keyframes mz-peek { 0%, 70%, 100% { transform: translateY(0); } 80% { transform: translateY(-6px); } 90% { transform: translateY(1px); } }
+  @keyframes mz-wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
+}
+@media (max-width: 640px) {
+  .mz-peek { height: 52px; } .mz-lounge { height: 60px; } .mz-values { top: -55px; right: 14px; } .mz-programs { top: -44px; right: 20px; }
+}
 .about-photos figcaption { position: absolute; left: 8px; bottom: 8px; padding: 3px 9px; border-radius: 999px; background: rgba(20,47,76,.78); color: #fff; font-size: .75rem; font-weight: 700; letter-spacing: .02em; }
 </style>
 </head>
@@ -524,7 +562,8 @@ dialog.ev-detail { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh
         </p>
         <p><a href="#about" data-nav="about"><span class="en">Read our full background →</span><span class="ja">設立の背景を読む →</span></a></p>
       </div>
-      <div class="values">
+      <div class="values has-mz">
+        <span class="mz mz-lounge mz-values" data-say="こんにちは！" aria-hidden="true"><img src="haru.png" alt=""></span>
         <div class="value">
           <span class="n"><span class="en">Value one</span><span class="ja">私たちが大切にすること 1</span></span>
           <h3><span class="en">A platform for practice</span><span class="ja">実践のためのプラットフォーム</span></h3>
@@ -539,42 +578,14 @@ dialog.ev-detail { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh
     </div>
   </section>
 
-  <section class="block tint">
-    <div class="wrap">
-      <div class="block-head">
-        <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Our mascots</span><span class="ja">マスコット</span></span>
-        <h2><span class="en">Meet Hanul, Hank and Haru</span><span class="ja">ハヌル、ハンク、ハルを紹介します</span></h2>
-      </div>
-      <div class="mascots">
-        <div class="mascot hanul">
-          <img src="hanul.png" width="139" height="136" alt="Hanul, a blue tiger cub with red and white stripes">
-          <span class="name">Hanul</span>
-          <span class="who"><span class="en">Korea</span><span class="ja">韓国</span></span>
-          <p><span class="en">Character description.</span><span class="ja">キャラクター説明。</span></p>
-        </div>
-        <div class="mascot hank">
-          <img src="hank.png" width="145" height="142" alt="Hank, a navy tiger cub with stars and red stripes">
-          <span class="name">Hank</span>
-          <span class="who"><span class="en">United States</span><span class="ja">米国</span></span>
-          <p><span class="en">Character description. </span><span class="ja">キャラクター説明。</span></p>
-        </div>
-        <div class="mascot haru">
-          <img src="haru.png" width="164" height="139" alt="Haru, a red tiger cub with cherry blossom markings">
-          <span class="name">Haru</span>
-          <span class="who"><span class="en">Japan</span><span class="ja">日本</span></span>
-          <p><span class="en">Character description.</span><span class="ja">キャラクター説明。</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="block">
     <div class="wrap">
       <div class="block-head">
         <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">What we do</span><span class="ja">活動内容</span></span>
         <h2><span class="en">Four ways the Japan Branch works</span><span class="ja">日本支部の4つの活動</span></h2>
       </div>
-      <div class="programs">
+      <div class="programs has-mz">
+        <span class="mz mz-peek mz-programs" data-say="Hi!" aria-hidden="true"><img src="hank-peek.png" alt=""></span>
         <div class="program">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M19 9h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-3.5-3"/></svg></span>
           <h3><span class="en">Dialogues &amp; workshops</span><span class="ja">対話・ワークショップ</span></h3>
@@ -619,7 +630,7 @@ dialog.ev-detail { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh
           <span class="eyebrow"><svg aria-hidden="true"><use href="#bars"/></svg><span class="en">Latest</span><span class="ja">最新情報</span></span>
           <h2><span class="en">From the newsletter</span><span class="ja">ニュースレターより</span></h2>
         </div>
-        <a class="btn ghost" href="#news" data-nav="news"><span class="en">All posts</span><span class="ja">すべての記事</span></a>
+        <span class="btn-peek"><span class="mz mz-peek mz-btn" data-say="안녕!" aria-hidden="true"><img src="hanul-peek.png" alt=""></span><a class="btn ghost" href="#news" data-nav="news"><span class="en">All posts</span><span class="ja">すべての記事</span></a></span>
       </div>
       <div class="posts" id="home-posts"></div>
     </div>
@@ -769,6 +780,35 @@ dialog.ev-detail { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh
       </div>
       <div class="note" id="members-note"><b><span class="en">Template</span><span class="ja">テンプレート</span></b><span><span class="en">These profiles are placeholders. Replace them with your team's names, roles and photos.</span><span class="ja">以下は仮のプロフィールです。メンバーの氏名・役職・写真に差し替えてください。</span></span></div>
       <div class="members" id="members"></div>
+    </div>
+  </section>
+
+  <section class="block" id="about-mascots">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="eyebrow"><button type="button" class="sec-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="sec-menu" aria-label="Jump to a section / 項目へ移動" title="Jump to a section / 項目へ移動"><svg aria-hidden="true"><use href="#bars"/></svg></button><span class="en">Our mascots</span><span class="ja">マスコット</span></span>
+        <h2><span class="en">Meet Hanul, Hank and Haru</span><span class="ja">ハヌル、ハンク、ハルを紹介します</span></h2>
+      </div>
+      <div class="mascots">
+        <div class="mascot hanul" data-say="안녕!">
+          <img src="hanul.png" width="139" height="136" alt="Hanul, a blue tiger cub with red and white stripes">
+          <span class="name">Hanul</span>
+          <span class="who"><span class="en">Korea</span><span class="ja">韓国</span></span>
+          <p><span class="en">Character description.</span><span class="ja">キャラクター説明。</span></p>
+        </div>
+        <div class="mascot hank" data-say="Hi!">
+          <img src="hank.png" width="145" height="142" alt="Hank, a navy tiger cub with stars and red stripes">
+          <span class="name">Hank</span>
+          <span class="who"><span class="en">United States</span><span class="ja">米国</span></span>
+          <p><span class="en">Character description. </span><span class="ja">キャラクター説明。</span></p>
+        </div>
+        <div class="mascot haru" data-say="こんにちは！">
+          <img src="haru.png" width="164" height="139" alt="Haru, a red tiger cub with cherry blossom markings">
+          <span class="name">Haru</span>
+          <span class="who"><span class="en">Japan</span><span class="ja">日本</span></span>
+          <p><span class="en">Character description.</span><span class="ja">キャラクター説明。</span></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -981,6 +1021,7 @@ dialog.ev-detail { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh
   <button type="button" role="menuitem" data-jump="about-background"><span class="en">Background</span><span class="ja">設立の背景</span></button>
   <button type="button" role="menuitem" data-jump="about-journey"><span class="en">How we got here</span><span class="ja">これまでの歩み</span></button>
   <button type="button" role="menuitem" data-jump="about-members"><span class="en">Our team</span><span class="ja">メンバー紹介</span></button>
+  <button type="button" role="menuitem" data-jump="about-mascots"><span class="en">Our mascots</span><span class="ja">マスコット</span></button>
 </div>
 </main>
 
